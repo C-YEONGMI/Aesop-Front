@@ -1,0 +1,972 @@
+@use "../../globals.scss" as *;
+
+.mypage {
+    $radius: 4px;
+
+    min-height: 100vh;
+    background: $bg-primary;
+
+    &__header-space { height: 70px; }
+
+    &__inner {
+        width: min(var(--content-max), calc(100% - (var(--page-gutter) * 2)));
+        margin: 0 auto;
+        padding: 60px 0 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    &__hero,
+    &__overview,
+    &__layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    &__eyebrow,
+    &__panel-kicker,
+    &__section-kicker,
+    &__profile-kicker,
+    &__wish-category {
+        color: $brown-400;
+        letter-spacing: 0.08em;
+    }
+
+    &__title,
+    &__panel-title,
+    &__section-title,
+    &__info-title,
+    &__profile-name {
+        color: $brown-800;
+    }
+
+    &__hero-copy { max-width: 760px; }
+
+    &__lede,
+    &__section-desc,
+    &__latest-desc,
+    &__status-note {
+        color: $brown-600;
+    }
+
+    &__lede {
+        white-space: nowrap;
+    }
+
+    &__hero-stats,
+    &__status-grid {
+        display: grid;
+        gap: 14px;
+    }
+
+    &__hero-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 28px; }
+    &__status-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 18px; }
+
+    &__stat-card,
+    &__overview-panel,
+    &__profile-card,
+    &__nav-item,
+    &__aside-link,
+    &__order-card,
+    &__wish-card,
+    &__info-card,
+    &__empty-card {
+        border: 1px solid rgba($brown-100, 0.92);
+        background: rgba($oatmeal, 0.9);
+        box-shadow: 0 18px 30px rgba($brown-900, 0.06);
+    }
+
+    &__stat-card,
+    &__overview-panel,
+    &__profile-card,
+    &__info-card,
+    &__empty-card {
+        border-radius: $radius;
+    }
+
+    &__stat-card {
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__stat-label,
+    &__status-label,
+    &__profile-label,
+    &__latest-meta,
+    &__order-date,
+    &__nav-desc,
+    &__aside-link-copy span:last-child,
+    &__support-link-copy span:last-child {
+        color: $brown-400;
+    }
+
+    &__profile-card,
+    &__overview-panel,
+    &__info-card {
+        padding: 28px;
+    }
+
+    &__profile-card {
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+    }
+
+    &__profile-mark,
+    &__status-icon,
+    &__nav-icon,
+    &__aside-link-icon,
+    &__support-link-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius;
+        color: $brown-800;
+        background: rgba($brown-100, 0.8);
+    }
+
+    &__profile-mark {
+        width: 72px;
+        height: 72px;
+        flex: 0 0 72px;
+        color: $oatmeal;
+        background: linear-gradient(135deg, $brown-700 0%, $brown-800 100%);
+    }
+
+    &__profile-body,
+    &__nav-copy,
+    &__aside-link-copy,
+    &__support-link-copy,
+    &__order-item-copy,
+    &__wish-copy {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__profile-body,
+    &__nav-copy,
+    &__aside-link-copy,
+    &__support-link-copy { gap: 6px; }
+
+    &__profile-body { flex: 1; gap: 18px; }
+
+    &__profile-summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba($brown-100, 0.9);
+        color: $brown-700;
+    }
+
+    &__profile-meta {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    &__profile-top,
+    &__panel-head,
+    &__latest-footer,
+    &__order-header,
+    &__order-footer,
+    &__wish-footer,
+    &__info-row,
+    &__support-link,
+    &__aside-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+    }
+
+    &__profile-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__settings,
+    &__logout,
+    &__profile-save,
+    &__profile-cancel {
+        cursor: pointer;
+        font-family: $font-suit;
+    }
+
+    &__logout,
+    &__settings,
+    &__inline-link,
+    &__empty-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: $brown-700;
+    }
+
+    &__settings {
+        width: 40px;
+        height: 40px;
+        justify-content: center;
+        border: none;
+        border-radius: $radius;
+        background: rgba($brown-100, 0.62);
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            color: $brown-900;
+            background: rgba($brown-200, 0.78);
+        }
+    }
+
+    &__logout {
+        padding: 10px 14px;
+        border: none;
+        border-radius: $radius;
+        background: rgba($brown-100, 0.62);
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            color: $brown-900;
+            background: rgba($brown-200, 0.78);
+        }
+    }
+
+    &__info-card-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    &__info-desc {
+        margin-top: 8px;
+        color: $brown-500;
+    }
+
+    &__info-edit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 18px;
+        border: none;
+        border-radius: $radius;
+        color: $brown-700;
+        background: rgba($brown-100, 0.62);
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            color: $brown-900;
+            background: rgba($brown-200, 0.78);
+        }
+    }
+
+    &__info-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    &__info-item {
+        min-width: 0;
+        min-height: 110px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        border: 1px solid rgba($brown-100, 0.92);
+        border-radius: $radius;
+        background: rgba($brown-50, 0.58);
+        color: $brown-700;
+    }
+
+    &__info-item--readonly {
+        justify-content: flex-start;
+    }
+
+    &__profile-editor {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    &__profile-editor--info {
+        padding-top: 0;
+        border-top: none;
+    }
+
+    &__profile-editor-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    &__profile-field {
+        min-width: 0;
+        min-height: 110px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        color: $brown-600;
+        border: 1px solid rgba($brown-100, 0.92);
+        border-radius: $radius;
+        background: rgba($brown-50, 0.58);
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid rgba($brown-200, 0.95);
+            border-radius: $radius;
+            background: rgba($oatmeal, 0.92);
+            color: $brown-800;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+            &:focus {
+                border-color: rgba($brown-500, 0.9);
+                box-shadow: 0 0 0 3px rgba($brown-100, 0.5);
+            }
+
+            &::placeholder {
+                color: $brown-300;
+            }
+        }
+    }
+
+    &__profile-editor-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    &__profile-save,
+    &__profile-cancel {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 104px;
+        padding: 11px 16px;
+        border: 1px solid transparent;
+        border-radius: $radius;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    &__profile-save {
+        color: $oatmeal;
+        background: $brown-800;
+
+        &:hover {
+            background: $brown-900;
+        }
+    }
+
+    &__profile-cancel {
+        color: $brown-700;
+        background: rgba($brown-100, 0.5);
+        border: 1px solid rgba($brown-200, 0.7);
+
+        &:hover {
+            color: $brown-800;
+            background: rgba($brown-100, 0.78);
+        }
+    }
+
+    &__status-flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 28px;
+        margin-top: 24px;
+    }
+
+    &__status-step {
+        width: 100%;
+        padding: 12px 8px;
+        border: none;
+        border-radius: $radius;
+        background: transparent;
+        cursor: pointer;
+        font: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+        color: $brown-400;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            color: $brown-700;
+            transform: translateY(-2px);
+
+            .mypage__status-visual,
+            .mypage__status-label {
+                color: $brown-700;
+            }
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba($brown-100, 0.95);
+        }
+
+        &.is-active {
+            .mypage__status-visual,
+            .mypage__status-label {
+                color: $brown-800;
+            }
+        }
+
+        &.is-selected {
+            background: rgba($brown-100, 0.42);
+
+            .mypage__status-visual,
+            .mypage__status-label {
+                color: $brown-900;
+            }
+        }
+    }
+
+    &__status-visual {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: $brown-500;
+    }
+
+    &__status-badge {
+        position: absolute;
+        top: -6px;
+        right: -10px;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        color: $oatmeal;
+        background: #c53a40;
+        box-shadow: 0 8px 16px rgba($brown-900, 0.16);
+    }
+
+    &__status-progress {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 28px;
+    }
+
+    &__status-segment {
+        height: 5px;
+        border-radius: 4px;
+        background: rgba($brown-100, 0.7);
+
+        &.is-active {
+            background: $brown-900;
+        }
+    }
+
+    &__status-note {
+        margin-top: 18px;
+        text-align: center;
+    }
+
+    &__status-icon,
+    &__nav-icon,
+    &__aside-link-icon,
+    &__support-link-icon {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+    }
+
+    &__latest-order,
+    &__latest-empty,
+    &__section,
+    &__order-list,
+    &__support-links {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__latest-order,
+    &__latest-empty,
+    &__section { gap: 18px; }
+    &__order-list,
+    &__support-links { gap: 16px; }
+
+    &__layout {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    &__tabs {
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+        background: $bg-primary;
+        border-bottom: 1px solid rgba($brown-100, 0.9);
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__tab,
+    &__aside-link,
+    &__support-link,
+    &__wish-card {
+        text-decoration: none;
+        transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease, color 0.24s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            border-color: rgba($brown-300, 0.92);
+            box-shadow: 0 20px 34px rgba($brown-900, 0.08);
+        }
+    }
+
+    &__tab {
+        flex: 0 0 auto;
+        min-height: 54px;
+        padding: 0 22px 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: $brown-400;
+        background: $bg-primary;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        box-shadow: none;
+
+        &.active {
+            color: $brown-800;
+            border-bottom-color: $brown-800;
+        }
+
+        &:hover {
+            color: $brown-700;
+            transform: none;
+            border-bottom-color: rgba($brown-300, 0.7);
+            box-shadow: none;
+        }
+
+        &.active:hover {
+            color: $brown-800;
+            border-bottom-color: $brown-800;
+        }
+    }
+
+    &__tab-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__content {
+        min-width: 0;
+    }
+
+    &__section-head { display: flex; flex-direction: column; gap: 8px; }
+
+    &__section-filter {
+        margin-top: 10px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid rgba($brown-100, 0.92);
+        border-radius: $radius;
+        background: rgba($brown-50, 0.62);
+    }
+
+    &__section-filter-label {
+        color: $brown-600;
+    }
+
+    &__filter-clear {
+        padding: 0;
+        border: none;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: $brown-700;
+        cursor: pointer;
+        font-family: $font-suit;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $brown-900;
+        }
+
+        &--empty {
+            margin-top: 4px;
+        }
+    }
+
+    &__order-card {
+        padding: 24px;
+        border-radius: $radius;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    &__order-headline { display: flex; flex-direction: column; gap: 4px; }
+    &__order-id,
+    &__order-item-copy,
+    &__wish-name,
+    &__latest-title { color: $brown-800; }
+
+    &__order-status {
+        flex-shrink: 0;
+    }
+
+    &__order-items { display: flex; flex-direction: column; gap: 14px; }
+
+    &__order-item {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: center;
+    }
+
+    &__order-item-media,
+    &__wish-media {
+        overflow: hidden;
+        background: $bg-product;
+    }
+
+    &__order-item-media {
+        width: 76px;
+        height: 76px;
+        border-radius: $radius;
+
+        img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+    }
+
+    &__order-item-copy { gap: 4px; min-width: 0; color: $brown-600; }
+    &__order-item-price,
+    &__order-footer strong { color: $brown-800; }
+    &__order-footer { padding-top: 18px; border-top: 1px solid rgba($brown-100, 0.92); color: $brown-500; }
+
+    &__empty-card {
+        padding: 30px;
+        align-items: flex-start;
+        color: $brown-500;
+    }
+
+    &__empty-link,
+    &__inline-link { margin-top: 4px; color: $brown-700; }
+
+    &__wish-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    &__wish-card {
+        border-radius: $radius;
+        padding: 16px 18px;
+        display: grid;
+        grid-template-columns: 112px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 18px;
+        color: $brown-700;
+    }
+
+    &__wish-media {
+        width: 112px;
+        height: 112px;
+        border-radius: $radius;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+
+        img { width: 100%; height: 100%; object-fit: contain; padding: 14px; }
+    }
+
+    &__wish-copy {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &__wish-side {
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: 12px;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    &__wish-meta { color: $brown-500; }
+
+    &__wish-name {
+        letter-spacing: -0.01em;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    &__wish-price {
+        color: $brown-800;
+        white-space: nowrap;
+    }
+
+    &__wish-actions {
+        order: -1;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__wish-button {
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid transparent;
+        border-radius: $radius;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        cursor: pointer;
+        font-family: $font-suit;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+        &--primary {
+            color: $oatmeal;
+            background: $brown-800;
+
+            &:hover {
+                background: $brown-900;
+            }
+        }
+
+        &--secondary {
+            color: $brown-800;
+            border-color: rgba($brown-300, 0.9);
+            background: rgba($oatmeal, 0.72);
+
+            &:hover {
+                border-color: rgba($brown-500, 0.9);
+                background: rgba($brown-100, 0.24);
+            }
+        }
+    }
+
+    &__support-link,
+    &__aside-link {
+        padding: 18px;
+        border-radius: $radius;
+        color: $brown-700;
+        background: rgba($oatmeal, 0.82);
+        border: 1px solid rgba($brown-100, 0.86);
+    }
+
+    &__support-link-copy,
+    &__aside-link-copy { flex: 1; }
+
+    @media (max-width: 1024px) {
+        &__hero,
+        &__overview,
+        &__layout,
+        &__info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        &__lede {
+            white-space: normal;
+        }
+
+        &__hero-stats,
+        &__status-grid,
+        &__status-flow {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        &__status-flow {
+            gap: 20px;
+        }
+
+        &__profile-summary {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        &__profile-editor-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        &__section-filter {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        &__wish-card {
+            grid-template-columns: 96px minmax(0, 1fr);
+            align-items: start;
+        }
+
+        &__wish-media {
+            width: 96px;
+            height: 96px;
+        }
+
+        &__wish-side {
+            min-width: 0;
+            grid-column: 2;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        &__wish-actions {
+            width: 100%;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        &__order-item {
+            grid-template-columns: 72px minmax(0, 1fr);
+            align-items: start;
+        }
+
+        &__order-item-price {
+            grid-column: 2 / 3;
+        }
+    }
+
+    @media (max-width: 767px) {
+        &__inner {
+            width: min(100%, calc(100% - (clamp(16px, 4.83vw, 20px) * 2)));
+            padding-top: 40px;
+            gap: 24px;
+        }
+
+        &__hero-stats {
+            grid-template-columns: 1fr;
+        }
+
+        &__status-flow {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            row-gap: 22px;
+        }
+
+        &__status-progress {
+            gap: 6px;
+        }
+
+        &__profile-card {
+            flex-direction: column;
+        }
+
+        &__profile-top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &__profile-summary {
+            grid-template-columns: 1fr;
+        }
+
+        &__info-card-head {
+            flex-direction: column;
+        }
+
+        &__info-list,
+        &__profile-editor-grid {
+            grid-template-columns: 1fr;
+        }
+
+        &__profile-actions {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        &__wish-card {
+            grid-template-columns: 84px minmax(0, 1fr);
+            gap: 14px;
+            padding: 14px;
+        }
+
+        &__wish-media {
+            width: 84px;
+            height: 84px;
+        }
+
+        &__wish-side {
+            min-width: 0;
+            grid-column: 2;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        &__wish-actions {
+            width: 100%;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        &__tabs {
+            gap: 0;
+        }
+
+        &__tab {
+            padding: 0 16px 12px;
+        }
+
+        &__order-item {
+            grid-template-columns: 64px minmax(0, 1fr);
+        }
+
+        &__order-item-price {
+            grid-column: 2 / 3;
+        }
+
+        &__profile-card,
+        &__overview-panel,
+        &__info-card,
+        &__order-card,
+        &__wish-card,
+        &__empty-card {
+            padding: 20px;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+.product-image-section {
+    position: relative;
+}
+
+.sold-out-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(18, 17, 15, 0.7);
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    z-index: 1;
+}
+
+.product-card.sold-out .product-main-img {
+    opacity: 0.4;
+}
+
+.variant-selector {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.variant-button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+/* 선택된 버튼 스타일 (이솝 감성) */
+.variant-button.active {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.product-main-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* 이미지가 바뀔 때 부드럽게 보이도록 애니메이션 추가 */
+    transition: opacity 0.4s ease;
+    /* 흰색/베이지색 등 밝은 배경을 가진 이미지의 배경을 투명하게 렌더링 */
+    mix-blend-mode: multiply;
+}
+
+/* 확장되었을 때는 말줄임 해제 */
+.desc.expanded {
+    line-clamp: unset;
+    -webkit-line-clamp: unset;
+    height: auto;
+}
+
+.more-btn {
+    background: none;
+    border: none;
+    color: #666;
+    text-decoration: underline;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0;
+}

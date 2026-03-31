@@ -1,0 +1,755 @@
+@use "../../globals.scss" as *;
+
+.auth-page {
+    background-color: $bg-primary;
+    min-height: 100vh;
+
+    &--status {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header-space {
+        height: 70px;
+    }
+
+    &__inner {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 80px 4% 100px;
+    }
+
+    &__inner--login {
+        max-width: 454px;
+        padding: 88px 40px 72px;
+    }
+
+    &__status-card {
+        border: 1px solid rgba($brown-200, 0.8);
+        background-color: rgba($oatmeal, 0.72);
+        padding: 40px 28px;
+        text-align: center;
+    }
+
+    &__status-spinner {
+        width: 38px;
+        height: 38px;
+        margin: 0 auto 20px;
+        border-radius: 999px;
+        border: 2px solid rgba($brown-200, 0.45);
+        border-top-color: $brown-700;
+        display: inline-flex;
+        animation: auth-page-spin 0.9s linear infinite;
+    }
+
+    &__status-title {
+        color: $brown-800;
+        margin-bottom: 12px;
+    }
+
+    &__status-message {
+        color: $brown-500;
+        line-height: 1.7;
+    }
+
+    &__status-actions {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+
+        a {
+            color: $brown-700;
+            border-bottom: 1px solid rgba($brown-300, 0.9);
+            text-decoration: none;
+
+            &:hover {
+                color: $brown-900;
+            }
+        }
+    }
+
+    &__title {
+        color: $brown-800;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    &__title--login {
+        text-align: left;
+        margin-bottom: 52px;
+    }
+
+    &__social {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+
+    &__social-button {
+        min-height: 54px;
+        padding: 0 18px;
+        border: 1px solid $brown-200;
+        background-color: rgba($oatmeal, 0.72);
+        color: $brown-800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        transition:
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            transform 0.2s ease;
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+
+        &--kakao {
+            background-color: #fee500;
+            border-color: #fee500;
+            color: #191600;
+        }
+
+        &--google {
+            background-color: #ffffff;
+            border-color: rgba($brown-200, 0.9);
+            color: #202124;
+        }
+
+        &--naver {
+            background-color: #03c75a;
+            border-color: #03c75a;
+            color: #ffffff;
+        }
+    }
+
+    &__social-badge {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background-color: rgba(255, 255, 255, 0.82);
+        color: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    &__divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+
+    &__divider-line {
+        flex: 1;
+        height: 1px;
+        background-color: rgba($brown-200, 0.8);
+    }
+
+    &__divider-text {
+        color: $brown-400;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__form--login {
+        gap: 22px;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        label {
+            color: $brown-600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid $brown-200;
+            background-color: $bg-primary;
+            color: $brown-800;
+            outline: none;
+            transition: border-color 0.2s ease;
+            font-family: $font-suit;
+
+            &:focus {
+                border-color: $brown-500;
+            }
+
+            &::placeholder {
+                color: $brown-200;
+            }
+        }
+    }
+
+    &__field--line {
+        gap: 0;
+    }
+
+    &__line-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 4px 12px;
+        border-bottom: 1px solid rgba($brown-300, 0.72);
+
+        input {
+            border: 0;
+            padding: 0;
+            background: transparent;
+
+            &:focus {
+                border: 0;
+            }
+        }
+    }
+
+    &__line-control--password {
+        .auth-page__password-toggle {
+            margin-left: auto;
+        }
+    }
+
+    &__input-icon {
+        color: rgba($brown-300, 0.95);
+        flex-shrink: 0;
+    }
+
+    &__password-field {
+        position: relative;
+
+        input {
+            padding-right: 52px;
+        }
+    }
+
+    &__password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        color: $brown-400;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            color: $brown-700;
+        }
+    }
+
+    &__password-toggle--line {
+        position: static;
+        transform: none;
+        color: rgba($brown-300, 0.95);
+
+        &:hover {
+            color: $brown-500;
+        }
+    }
+
+    &__remember {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: $brown-500;
+        cursor: pointer;
+
+        input {
+            width: 16px;
+            height: 16px;
+            accent-color: $brown-700;
+        }
+    }
+
+    &__remember--login {
+        gap: 9px;
+        margin-top: -2px;
+        color: $brown-700;
+
+        input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid rgba($brown-700, 0.92);
+            background: transparent;
+            margin: 0;
+            position: relative;
+
+            &:checked {
+                background-color: rgba($brown-700, 0.12);
+            }
+
+            &:checked::after {
+                content: '';
+                position: absolute;
+                left: 5px;
+                top: 1px;
+                width: 5px;
+                height: 10px;
+                border: solid $brown-800;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    &__error {
+        color: #c0392b;
+        text-align: center;
+    }
+
+    &__error--login {
+        text-align: left;
+        margin-top: -6px;
+        line-height: 1.6;
+    }
+
+    &__submit {
+        width: 100%;
+        padding: 16px;
+        border-radius: 4px;
+        background-color: $brown-800;
+        color: $oatmeal;
+        border: none;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $brown-900;
+        }
+    }
+
+    &__submit--login {
+        margin-top: 6px;
+        padding: 18px 16px;
+    }
+
+    &__links {
+        text-align: center;
+        margin-top: 24px;
+        color: $brown-400;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+
+        a {
+            color: $brown-600;
+            text-decoration: none;
+            border-bottom: 1px solid $brown-300;
+
+            &:hover {
+                color: $brown-800;
+            }
+        }
+    }
+
+    &__test-btn {
+        display: block;
+        width: 100%;
+        margin-top: 16px;
+        padding: 12px;
+        background: none;
+        border: 1px dashed $brown-300;
+        color: $brown-400;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: $font-suit;
+
+        &:hover {
+            border-color: $brown-500;
+            color: $brown-600;
+        }
+    }
+
+    &__test-btn--login {
+        width: auto;
+        margin: 24px auto 0;
+        padding: 0;
+        border: 0;
+        border-bottom: 1px dashed rgba($brown-300, 0.85);
+    }
+
+    &__quick-links {
+        margin-top: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: rgba($brown-300, 0.98);
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+
+            &:hover {
+                color: $brown-500;
+            }
+        }
+    }
+
+    &__simple-login {
+        margin-top: 34px;
+    }
+
+    &__divider--simple {
+        margin-bottom: 22px;
+
+        .auth-page__divider-text {
+            color: rgba($brown-300, 0.98);
+        }
+    }
+
+    &__social-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__social-long-button {
+        width: 100%;
+        min-height: 52px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: 4px;
+        box-shadow: none;
+        background-color: #fff;
+        color: #1f1f1f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $font-suit;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0;
+        cursor: pointer;
+        transition:
+            transform 0.2s ease,
+            background-color 0.2s ease;
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    &__social-long-button-content {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    &__social-long-button--google {
+        background-color: #fff;
+        box-shadow: none;
+
+        &:active {
+            background-color: #f8f9fa;
+            box-shadow: none;
+        }
+    }
+
+    &__social-long-button--kakao {
+        background: #FEE500;
+        background-color: #FEE500;
+        color: #191600;
+        box-shadow: none;
+
+        &:active {
+            background-color: #f5dd00;
+            box-shadow: none;
+        }
+    }
+
+    &__social-long-button--naver {
+        background-color: #03c75a;
+        color: #ffffff;
+        box-shadow: none;
+
+        &:active {
+            background-color: #02b452;
+            box-shadow: none;
+        }
+
+        .auth-page__social-long-button-icon svg {
+            transform: translateX(-1px);
+        }
+    }
+
+    &__social-long-button-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        img,
+        svg {
+            display: block;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__social-long-button-text {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-width: 0;
+    }
+
+    &__modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background-color: rgba(28, 20, 14, 0.48);
+        backdrop-filter: blur(2px);
+    }
+
+    &__modal-panel {
+        width: min(100%, 440px);
+        border: 1px solid rgba($brown-200, 0.92);
+        background-color: rgba($oatmeal, 0.98);
+        box-shadow: 0 28px 60px rgba(33, 24, 17, 0.2);
+        padding: 28px 24px 24px;
+    }
+
+    &__modal-title {
+        color: $brown-800;
+        margin-bottom: 14px;
+        text-align: center;
+    }
+
+    &__social-notice {
+        margin-top: 18px;
+        padding: 16px 18px;
+        border: 1px solid rgba($brown-200, 0.92);
+        background-color: rgba($oatmeal, 0.78);
+        color: $brown-700;
+    }
+
+    &__social-notice-text {
+        line-height: 1.7;
+    }
+
+    &__social-notice-id {
+        margin-top: 10px;
+        color: $brown-800;
+
+        strong {
+            font-weight: 600;
+        }
+    }
+
+    &__social-notice-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    &__social-notice-btn {
+        padding: 10px 14px;
+        border: 1px solid rgba($brown-300, 0.92);
+        background: transparent;
+        color: $brown-700;
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+
+        &:hover {
+            background-color: rgba($brown-700, 0.08);
+            border-color: rgba($brown-500, 0.92);
+        }
+    }
+
+    &__social-notice-btn--primary {
+        background-color: $brown-800;
+        border-color: $brown-800;
+        color: $oatmeal;
+
+        &:hover {
+            background-color: $brown-900;
+            border-color: $brown-900;
+            color: $oatmeal;
+        }
+    }
+
+    &__social-icon-button {
+        width: 56px;
+        height: 56px;
+        margin: 18px auto 0;
+        border-radius: 999px;
+        border: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            transform 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        &--kakao {
+            background-color: #fee500;
+            color: #191600;
+        }
+
+        &--naver {
+            background-color: #03c75a;
+            color: #ffffff;
+        }
+
+        &--google {
+            background-color: #ffffff;
+            border: 1px solid rgba($brown-200, 0.82);
+            color: #4285f4;
+        }
+    }
+
+    &__social-icon-badge {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+
+    &__social-icon-badge--kakao {
+        svg {
+            width: 30px;
+            height: 30px;
+            transform: translate(-0.5px, 0.5px);
+        }
+    }
+
+    &__social-icon-badge--naver {
+        svg {
+            width: 28px;
+            height: 28px;
+            transform: translate(0, 0.5px);
+        }
+    }
+
+    &__social-icon-badge--google {
+        svg {
+            width: 30px;
+            height: 30px;
+            transform: translate(0.5px, 0.5px);
+        }
+    }
+
+    &__sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+}
+
+.gsi-material-button-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    height: 20px;
+    margin-right: 0;
+    width: 20px;
+
+    svg {
+        display: block;
+        height: 20px;
+        width: 20px;
+    }
+}
+
+.gsi-material-button-contents {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes auth-page-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 767px) {
+    .auth-page {
+        &__inner {
+            width: min(100%, calc(100% - (clamp(16px, 4.83vw, 20px) * 2)));
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__inner--login {
+            max-width: 100%;
+            padding: 72px 0 56px;
+        }
+
+        &__title--login {
+            margin-bottom: 40px;
+        }
+
+        &__quick-links {
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        &__social-icons {
+            gap: 14px;
+        }
+
+        &__social-icon-button {
+            width: 52px;
+            height: 52px;
+        }
+
+        &__social-notice-actions {
+            flex-direction: column;
+        }
+
+        &__modal-backdrop {
+            padding: 18px;
+        }
+
+        &__modal-panel {
+            padding: 24px 18px 20px;
+        }
+    }
+}

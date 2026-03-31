@@ -1,0 +1,41 @@
+// src/components/common/badge/Badge.scss
+@use '../../../globals.scss' as *;
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 12px;
+
+    @extend .suit-14-m;
+    color: $oatmeal;
+    white-space: nowrap;
+}
+
+.badge-best {
+    background-color: $point-pink;
+}
+
+.badge-new {
+    background-color: $point-green;
+}
+
+.badge-exclusive {
+    background-color: $brown-500;
+}
+
+.badge-order-refund {
+    background-color: $point-pink;
+}
+
+.badge-order-complete {
+    background-color: $brown-500;
+}
+
+.badge-order-shipping {
+    background-color: $brown-700;
+}
+
+.badge-order-delivered {
+    background-color: $point-green;
+}

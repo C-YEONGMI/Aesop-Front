@@ -1,0 +1,918 @@
+@use "../../globals.scss" as *;
+
+// ─── Shared ───────────────────────────────────────────────────────────────────
+.our-story {
+    background-color: $bg-primary;
+}
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+// 300vh 스크롤 컨테이너 — 내부 패널이 GSAP으로 핀됨
+.about-hero {
+    position: relative;
+    height: 500vh;
+
+    // 100vh sticky 패널 — CSS sticky로 스크롤 중 완전 고정
+    &__panel {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    // 비디오 배경
+    &__video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    // 색상 오버레이 — GSAP이 backgroundColor를 슬라이드마다 전환
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        // background-color은 inline style로 초기값 설정, GSAP이 이후 제어
+        transition: none; // GSAP이 직접 처리하므로 CSS transition 불필요
+    }
+
+    // 텍스트 컨테이너 — 화면 중앙 고정
+    &__content {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 0 24px;
+    }
+
+    &__heading {
+        display: flex;
+        flex-direction: column;
+        max-width: 710px;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    // "We cultivate" — montage-128 클래스로 폰트 적용
+    // Figma Montage/128 lineHeight: 100(=1.0) → normal(≈1.2) 오버라이드
+    &__pre {
+        color: $brown-700;
+        line-height: 1;
+    }
+
+    // 변하는 자막 — optima-70 클래스로 폰트 적용
+    &__subtitle {
+        color: $brown-700;
+        margin-top: clamp(-32px, -1.67vw, -8px);
+    }
+
+    // 변하는 설명 텍스트 컨테이너 — suit-16-r 클래스로 폰트 적용
+    &__desc {
+        color: $brown-500;
+        max-width: 654px;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    // 줄별 애니메이션 래퍼 — overflow hidden으로 slide-up 클리핑
+    .desc-line-wrap {
+        overflow: hidden;
+        line-height: inherit;
+    }
+
+    .desc-line {
+        display: block;
+    }
+
+    // ── 반응형: clamp 기반 유동 폰트 ────────────────────────
+    .montage-128 {
+        font-size: clamp(3rem, 1.786rem + 5.18vw, 128px);
+    }
+    .optima-70 {
+        font-size: clamp(1.25rem, 0.491rem + 3.24vw, 70px);
+    }
+    .suit-16-r {
+        font-size: clamp(0.75rem, 0.689rem + 0.26vw, 1rem);
+    }
+
+    @media (max-width: 768px) {
+        // 패널: 700px 고정 높이 (피그마 모바일)
+        &__panel {
+            height: 700px;
+        }
+
+        &__heading {
+            max-width: none;
+            margin-bottom: 0; // gap 32px가 간격 담당
+        }
+
+        &__subtitle {
+            margin-top: 0; // 데스크톱 negative margin 제거
+        }
+
+        &__desc {
+            // 피그마: 205px, 좌측 정렬, 자연 줄바꿈
+            max-width: 205px;
+            white-space: normal;
+            text-align: left;
+        }
+
+        // desc-line 개별 요소 — 모바일에서 inline으로 전환해 자연 줄바꿈
+        .desc-line-wrap {
+            display: inline;
+            overflow: visible;
+        }
+        .desc-line {
+            display: inline;
+            white-space: normal;
+        }
+
+        &__content {
+            gap: 32px;
+            padding: 0 16px 60px;
+        }
+    }
+}
+
+// ─── Story Mid (Our Values → Origins 통합 섹션) ───────────────────────────────
+// 헤딩이 화면 중앙에서 시작해 스크롤 시 top:100px에 머물며 Origins 컨텐츠가 아래서 올라오는 A안
+// Figma 719-2436: background $bg-primary (#eee5da)
+.about-story-mid {
+    position: relative;
+    height: 900vh;
+    background-color: $bg-primary;
+
+    // CSS sticky 패널 — 100vh 고정
+    &__panel {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+        background-color: $bg-primary;
+    }
+}
+
+// ─── Our Values ───────────────────────────────────────────────────────────────
+.about-values {
+    // 헤딩: 패널 안에서 absolute 배치, GSAP이 중앙→top:140px 로 이동
+    &__heading {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        // GSAP이 xPercent:-50, yPercent:-50 으로 중앙 정렬 후 스크럽
+        color: $brown-700;
+        line-height: 1;
+        white-space: nowrap;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    // EN/KR 텍스트 묶음: 헤딩 바로 아래 위치, GSAP이 fade-out
+    &__texts {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 56px); // 헤딩 높이(80px/2=40px) + gap(16px) = 56px
+        transform: translateX(-50%);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 593px;
+        width: calc(100% - 48px);
+        z-index: 2;
+    }
+
+    // optima-18 클래스로 폰트 적용
+    &__en {
+        color: $brown-600;
+    }
+
+    // suit-18-r 클래스로 폰트 적용
+    &__kr {
+        color: $brown-600;
+
+        // 데스크톱에서 모바일 전용 br 숨김
+        .mobile-br {
+            display: none;
+        }
+    }
+}
+
+// ─── Origins ──────────────────────────────────────────────────────────────────
+.about-origins {
+    // 탭/컨텐츠 영역: 헤딩 고정 위치 아래에 배치 (GSAP이 초기 yPercent:100)
+    &__inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 218px 8.85% 0;
+    }
+
+    // Figma: tabs(455px) gap(361px) content(764px) = 1580px 내부
+    &__body {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 28.8% 1fr; // 455/1580 ≈ 28.8%
+        column-gap: 22.8%;               // 361/1580 ≈ 22.8%
+        align-items: start;
+    }
+}
+
+// ─── 5개 탭 장식선 공통 베이스 ───────────────────────────────────────────────
+// inner(position:absolute, 전체 패널 커버) 기준 absolute — Figma 1920px 좌표 직접 사용
+.about-line-wrap {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+
+    svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        overflow: visible;
+    }
+}
+
+// Figma 778:1642 — Origins: left=153px, top=321px, w=1521px
+// top 보정: Figma Origins inner gap=160px → content y=278px
+//           CSS body padding-top=218px(Naming 기준) → 차이 60px 차감
+.about-origins__line-wrap {
+    left: 7.97vw;    // 153/1920
+    top: 261px;      // 321 - 60
+    width: 79.22vw;  // 1521/1920
+    max-width: 1521px;
+}
+
+// Figma 860:206 — Naming: left=calc(16.67%+141.5px), top=314.5px, w=1127.5px
+// Naming inner gap=100px → content y=218px → CSS padding-top=218px 동일 → 보정 없음
+.about-naming__line-wrap {
+    left: calc(16.67% + 141.5px);
+    top: 314.5px;    // 보정 없음
+    width: 58.72vw;  // 1127.5/1920
+    max-width: 1127.5px;
+}
+
+// Figma 719:2465 — Formulation: left=calc(25%+139px), top=231px, w=1003.5px
+// top 보정: Figma gap=160px → content y=278px → -60px
+.about-formulation__line-wrap {
+    left: calc(25% + 139px);
+    top: 171px;      // 231 - 60
+    width: 52.27vw;  // 1003.5/1920
+    max-width: 1003.5px;
+}
+
+// Figma 719:2480 — Architecture: left=calc(25%+145px), top=317px, w=1043.4px
+// top 보정: Figma gap=160px → content y=278px → -60px
+.about-architecture__line-wrap {
+    left: calc(25% + 145px);
+    top: 257px;      // 317 - 60
+    width: 54.35vw;  // 1043.4/1920
+    max-width: 1043.4px;
+}
+
+// Figma 719:2510 — Approach: left=calc(25%+73px), top=491px, w=442.8px
+// top 보정: Figma gap=160px → content y=278px → -60px
+.about-approach__line-wrap {
+    left: calc(25% + 73px);
+    top: 431px;      // 491 - 60
+    width: 23.06vw;  // 442.8/1920
+    max-width: 442.8px;
+}
+
+.about-origins {
+    &__tabs {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 32px; // Figma gap: 32px
+        list-style: none;
+        padding: 0;
+        border: none;
+        background: none;
+    }
+
+    // Figma: Montage/80, brown-700, inactive opacity:30%
+    &__tab {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        font-family: $font-montage;
+        font-size: clamp(1.25rem, 0.34rem + 3.88vw, 5rem);
+        font-weight: 400;
+        line-height: 1;
+        color: $brown-700;
+        opacity: 0.3;
+        transition: opacity 0.3s ease;
+
+        &.is-active {
+            opacity: 1;
+        }
+
+        &:hover:not(.is-active) {
+            opacity: 0.6;
+        }
+    }
+
+    &__content {
+        position: relative;
+        z-index: 1;
+        padding-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px; // Figma gap: 16px
+    }
+
+    // Figma: Optima/48, brown-700
+    &__content-en {
+        font-family: $font-optima;
+        font-size: clamp(0.875rem, 0.36rem + 2.2vw, 3rem);
+        font-weight: 400;
+        line-height: normal;
+        color: $brown-700;
+
+        // Formulation 탭만 40px (Figma 지정)
+        &--sm {
+            font-size: clamp(0.875rem, 0.36rem + 2.2vw, 2.5rem);
+        }
+    }
+
+    &__content-kr {
+        font-family: $font-suit;
+        font-size: clamp(0.75rem, 0.659rem + 0.39vw, 1.125rem);
+        font-weight: 400;
+        line-height: 1.5;
+        color: $brown-600;
+        white-space: pre-line;
+    }
+}
+
+// ─── Char Split 공통 ──────────────────────────────────────────────────────────
+// 타이틀 글자별 슬라이드업 애니메이션용
+.char-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.char {
+    display: inline-block;
+}
+
+// ─── Large Section Title (Formulation / Architecture / Sustainability) ─────────
+// 폰트는 optima-220 클래스로 적용 — 여기선 레이아웃·색상만
+%about-section-title {
+    color: $brown-800;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+%about-section-desc {
+    font-family: $font-suit;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $brown-500;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+// ─── Formulation ─────────────────────────────────────────────────────────────
+.about-formulation {
+    position: relative;
+    height: 100vh;
+    overflow: visible;
+    background-color: $bg-primary;
+
+    // Figma 802:1331: 타이틀+이너를 하나의 flex-col 컬럼으로
+    // left=right=calc(8.33%+247px)로 중앙 배치, top:9.07%(98/1080)
+    &__col {
+        position: absolute;
+        left: calc(8.33% + 247px);
+        right: calc(8.33% + 247px);
+        top: 98px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 70px;
+    }
+
+    // optima-220 클래스로 폰트 적용 — 레이아웃·색상만 여기서
+    // &.optima-220으로 specificity를 높여 main.jsx의 globals import 순서 문제 방지
+    // line-height: 1 고정 — 1.5로 두면 half-leading 55px이 A-B 사이에 추가돼 Figma와 어긋남
+    &__title {
+        width: 100%;
+        color: $brown-800;
+        white-space: nowrap;
+        pointer-events: none;
+
+        &.optima-220 {
+            line-height: 1;
+        }
+    }
+
+    // Figma 802:1326: 740px, gap:32px, 하단 -70px margin으로 texture 오버랩
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        width: 46.88vw;   // 900/1920
+        max-width: 900px;
+        margin-bottom: -70px;
+        position: relative;
+        z-index: 2;
+    }
+
+    // 사진 래퍼: 740×400 비율 유지
+    &__main {
+        width: 100%;
+        aspect-ratio: 740 / 400;
+        overflow: hidden;
+        position: relative;
+        flex-shrink: 0;
+
+        img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    // 설명 텍스트: SUIT Light 20px, 3줄
+    &__desc {
+        font-family: $font-suit;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.5;
+        color: $brown-500;
+        text-align: center;
+    }
+
+    // 텍스처: 독립 absolute 레이어, 회전 없이 이미지 원본 방향 그대로 표시
+    // Figma: left:calc(58.33%+24px), top:209px, w:450.985px(≈23.49vw)
+    &__texture {
+        position: absolute;
+        left: calc(58.33% + 24px);
+        top: 140px;
+        width: 23.49vw;
+        max-width: 451px;
+        z-index: 4;
+        pointer-events: none;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+}
+
+// ─── Architecture ─────────────────────────────────────────────────────────────
+.about-architecture {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $bg-primary;
+
+    // 타이틀: 카드 위에 항상 노출
+    &__title {
+        @extend %about-section-title;
+        top: 40px;
+        z-index: 15;
+    }
+
+    // 카드 스테이지 — framer-motion 카드의 absolute 좌표 기준 컨테이너
+    &__stage {
+        position: absolute;
+        inset: 0;
+        overflow: visible;
+    }
+
+    &__desc {
+        @extend %about-section-desc;
+        top: auto;
+        bottom: 70px;
+        padding: 0 28%;
+        z-index: 15;
+    }
+}
+
+// ─── Architecture Cards ────────────────────────────────────────────────────────
+// width/height/position은 framer-motion style prop으로 인라인 설정
+.arch-card {
+    cursor: pointer;
+    will-change: transform;
+    user-select: none;
+
+    &__inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+    }
+
+    &__front,
+    &__back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    &__front {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+    }
+
+    &__back {
+        background: rgba(30, 30, 30, 0.95);
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px 16px;
+    }
+
+    &__location {
+        font-family: $font-suit;
+        font-size: 10px;
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        color: $bg-product;
+        text-transform: uppercase;
+    }
+
+    &__name {
+        font-family: $font-optima;
+        font-size: 18px;
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    &__desc {
+        font-family: $font-suit;
+        font-size: 12px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+}
+
+// ─── Sustainability ───────────────────────────────────────────────────────────
+.about-sustainability {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $bg-primary;
+
+    &__title {
+        @extend %about-section-title;
+        top: 9.07%; // 98/1080
+    }
+
+    &__body {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translateX(-50%);
+        width: 33.07%; // 635/1920
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__image {
+        width: 100%;
+        overflow: hidden;
+        will-change: clip-path;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            will-change: transform;
+        }
+    }
+
+    &__desc {
+        position: relative;
+        left: auto;
+        width: auto;
+        font-family: $font-suit;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.5;
+        color: $brown-500;
+        text-align: center;
+        margin-top: 32px;
+    }
+}
+
+// ─── 섹션 타이틀 유동 폰트 (Desktop → Mobile) ──────────────────────────────
+// Optima 220px(1920) → 48px(375)
+.about-formulation__title.optima-220,
+.about-architecture__title.optima-220,
+.about-sustainability__title.optima-220 {
+    font-size: clamp(3rem, 0.39rem + 11.13vw, 13.75rem);
+}
+
+// Values heading: Montage 80px(1920) → 48px(375)
+.about-values__heading.montage-80 {
+    font-size: clamp(3rem, 2.515rem + 2.07vw, 5rem);
+}
+
+// ─── Responsive (≤ 768px) ───────────────────────────────────────────────────
+@media (max-width: 768px) {
+
+    // ── Values ──────────────────────────────────────────────────────────────
+    // top:47% → GSAP 스크럽 후 heading이 패널 상단 ~64px에 위치
+    .about-values__heading {
+        top: 47%;
+    }
+
+    .about-values__texts {
+        top: calc(47% + 56px);
+        max-width: none;
+        width: calc(100% - 32px);
+    }
+
+    // KR 텍스트: 18px → 12px (피그마 SUIT/12px)
+    // .suit-18-r 글로벌 클래스보다 specificity를 높여 오버라이드
+    .about-values__kr.suit-18-r {
+        font-size: 0.75rem;
+    }
+
+    .about-values__kr {
+        // 모바일 전용 br 표시
+        .mobile-br {
+            display: inline;
+        }
+    }
+
+    // ── Origins ─────────────────────────────────────────────────────────────
+    .about-origins__inner {
+        // 피그마: heading(64px) + heading높이(30px) + gap(100px) = 194px
+        padding: 194px 16px 0;
+    }
+
+    .about-origins__body {
+        display: flex;
+        justify-content: space-between;
+        max-width: 338px;
+        margin: 0 auto;
+        column-gap: 0; // 데스크톱 grid column-gap 22.8% 리셋 (space-between이 간격 처리)
+    }
+
+    .about-origins__tabs {
+        width: 136px;
+        flex-shrink: 0;
+    }
+
+    .about-origins__content {
+        width: 150px;
+        flex-shrink: 0;
+        padding-top: 0;
+    }
+
+    // EN: line-height 1.5 (피그마 Optima/14)
+    .about-origins__content-en {
+        line-height: 1.5;
+    }
+
+    // KR: \n 강제 줄바꿈 제거 → 150px 안에서 자연 줄바꿈
+    .about-origins__content-kr {
+        white-space: normal !important;
+
+        // TextEffect per="line"이 만드는 display:block span → inline 전환
+        > span {
+            display: inline !important;
+        }
+    }
+
+    // ── 장식선: opacity 50% + 모바일 좌표 재배치 (피그마 기준) ────────────
+    // body(338px)가 inner 중앙 정렬이므로 calc(50% - 169px + figma_left)로 환산
+    .about-line-wrap {
+        opacity: 0.5;
+    }
+
+    .about-origins__line-wrap {
+        left: calc(50% - 168.5px);  // 50% - 169 + 0.5
+        top: calc(194px + 15.5px);  // inner padding-top(194) + figma top
+        width: 338px;
+        max-width: 338px;
+    }
+
+    .about-naming__line-wrap {
+        left: calc(50% - 121.5px);  // 50% - 169 + 47.5
+        top: calc(194px + 32px);
+        width: 282px;
+        max-width: 282px;
+    }
+
+    .about-formulation__line-wrap {
+        left: calc(50% - 81.5px);   // 50% - 169 + 87.5
+        top: calc(194px + 36px);
+        width: 251px;
+        max-width: 251px;
+    }
+
+    .about-architecture__line-wrap {
+        left: calc(50% - 91.5px);   // 50% - 169 + 77.5
+        top: calc(194px + 61px);
+        width: 261px;
+        max-width: 261px;
+    }
+
+    .about-approach__line-wrap {
+        left: calc(50% - 100.5px);  // 50% - 169 + 68.5
+        top: calc(194px + 153px);
+        width: 111px;
+        max-width: 111px;
+    }
+
+    // ── Formulation (피그마: flex-col, gap:16px, 중앙 정렬) ────────────────
+    .about-formulation {
+        height: auto;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        padding-bottom: 80px;
+        gap: 16px;
+
+        .optima-220 {
+            letter-spacing: -0.96px;
+            white-space: normal;
+        }
+    }
+
+    .about-formulation__col {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        width: 245px;
+        padding: 0;
+        padding-bottom: 0;
+    }
+
+    .about-formulation__title.optima-220 {
+        line-height: normal;
+    }
+
+    .about-formulation__content {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 0;
+        gap: 16px;
+    }
+
+    .about-formulation__main {
+        width: 100%;
+    }
+
+    .about-formulation__desc {
+        font-size: 0.75rem;
+        width: 285px;
+        max-width: 285px;
+        color: $brown-500;
+
+        // 모바일: 데스크톱 <br> 숨기고 285px 안에서 자연 줄바꿈
+        br {
+            display: none;
+        }
+    }
+
+    // 텍스쳐: 피그마 left:232px, top:9px, w:123px
+    .about-formulation__texture {
+        left: 232px;
+        right: auto;
+        top: 24px;
+        width: 123px;
+        max-width: 123px;
+        z-index: 5;
+    }
+
+    // ── Architecture (100vh 유지, 카드 arc + pin) ─────────────────────────
+    .about-architecture {
+        .optima-220 {
+            letter-spacing: -0.96px;
+        }
+    }
+
+    .about-architecture__title {
+        top: 16px;
+    }
+
+    .about-architecture__desc {
+        font-size: 0.75rem;
+        padding: 0 16px;
+        max-width: 285px;
+        top: 213px;
+        bottom: auto;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform: none;
+        color: $brown-500;
+    }
+
+    .arch-card__back {
+        padding: 6px 8px;
+    }
+    .arch-card__name {
+        font-size: 10px;
+    }
+    .arch-card__desc {
+        font-size: 8px;
+    }
+    .arch-card__location {
+        font-size: 7px;
+    }
+
+    // ── Sustainability (피그마: flex-col, gap:32px, 중앙 정렬) ─────────────
+    .about-sustainability {
+        height: auto;
+        min-height: 0;
+        padding: 24px 16px 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .optima-220 {
+            letter-spacing: -0.96px;
+        }
+    }
+
+    .about-sustainability__title {
+        position: static;
+        margin-bottom: 16px;
+    }
+
+    .about-sustainability__body {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-sustainability__image {
+        max-width: 180px;
+        height: 120px;
+        margin: 0 auto;
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+    .about-sustainability__desc {
+        font-size: 0.75rem;
+        margin-top: 32px;
+        color: $brown-500;
+    }
+
+    // ── Section desc 공통 ───────────────────────────────────────────────────
+    .about-formulation__desc,
+    .about-architecture__desc,
+    .about-sustainability__desc {
+        font-weight: 400;
+    }
+}

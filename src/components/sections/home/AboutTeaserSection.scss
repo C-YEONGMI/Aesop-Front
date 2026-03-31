@@ -1,0 +1,356 @@
+@use "../../../globals.scss" as *;
+
+.about-teaser {
+    position: relative;
+    width: 100%;
+    height: calc(100vh + var(--about-scroll-distance, 2200px));
+    min-height: calc(100vh + var(--about-scroll-distance, 2200px));
+    overflow: clip;
+    background-color: $brown-900;
+
+    &__inner {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+
+    &__video-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 850px;
+        height: 478px;
+        overflow: hidden;
+        background-color: #000;
+        max-width: none;
+        z-index: 1;
+        will-change: transform, width, height, border-radius;
+    }
+
+    &__video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        will-change: transform, filter;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background:
+            radial-gradient(circle at 50% 18%, rgba(255, 251, 243, 0.06), transparent 32%),
+            linear-gradient(180deg, rgba(18, 17, 15, 0.54) 0%, rgba(18, 17, 15, 0.98) 100%);
+        backdrop-filter: blur(18px) saturate(0.78);
+        -webkit-backdrop-filter: blur(18px) saturate(0.78);
+        pointer-events: none;
+        will-change: opacity, clip-path;
+    }
+
+    &__content {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    &__content-inner {
+        position: relative;
+        width: min(1480px, calc(100% - 120px));
+        min-height: 100%;
+        margin: 0 auto;
+        padding: clamp(56px, 7vh, 112px) 0 clamp(64px, 8vh, 88px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__headline {
+        margin: 0;
+        color: $oatmeal;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 1.08;
+    }
+
+    &__divider {
+        display: block;
+        width: 1px;
+        height: 32px;
+        margin: clamp(22px, 2.8vh, 30px) auto clamp(16px, 2.2vh, 24px);
+        background-color: rgba($oatmeal, 0.6);
+    }
+
+    &__body {
+        width: min(860px, 100%);
+        margin: 0;
+        color: $oatmeal;
+        text-align: center;
+    }
+
+    &__pillars {
+        --pillar-width: clamp(240px, 20.8vw, 300px);
+
+        width: min(1248px, 100%);
+        margin-top: clamp(36px, 5.5vh, 72px);
+        display: grid;
+        grid-template-columns: repeat(3, var(--pillar-width));
+        justify-content: space-between;
+        gap: clamp(20px, 3vw, 48px);
+    }
+
+    &__pillar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $oatmeal;
+        text-align: center;
+    }
+
+    &__pillar-visual {
+        width: 100%;
+        aspect-ratio: 300 / 394;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba($oatmeal, 0.14);
+        background-color: rgba(255, 251, 243, 0.06);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+    }
+
+    &__pillar-image,
+    &__pillar-shade {
+        position: absolute;
+        inset: 0;
+    }
+
+    &__pillar-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.02);
+    }
+
+    &__pillar-shade {
+        background:
+            linear-gradient(180deg, rgba(18, 17, 15, 0.06) 0%, rgba(18, 17, 15, 0.3) 56%, rgba(18, 17, 15, 0.68) 100%),
+            radial-gradient(circle at 50% 14%, rgba(255, 251, 243, 0.2), transparent 34%);
+        pointer-events: none;
+    }
+
+    &__pillar--vegan .about-teaser__pillar-image {
+        object-position: center center;
+    }
+
+    &__pillar--vegan .about-teaser__pillar-shade {
+        background:
+            linear-gradient(180deg, rgba(18, 17, 15, 0.08) 0%, rgba(18, 17, 15, 0.34) 58%, rgba(18, 17, 15, 0.76) 100%),
+            radial-gradient(circle at 50% 10%, rgba(242, 237, 228, 0.24), transparent 36%);
+    }
+
+    &__pillar--recycled .about-teaser__pillar-image {
+        object-position: 38% center;
+    }
+
+    &__pillar--recycled .about-teaser__pillar-shade {
+        background:
+            linear-gradient(180deg, rgba(18, 17, 15, 0.08) 0%, rgba(18, 17, 15, 0.28) 54%, rgba(18, 17, 15, 0.74) 100%),
+            radial-gradient(circle at 42% 10%, rgba(224, 183, 126, 0.18), transparent 34%);
+    }
+
+    &__pillar--sourcing .about-teaser__pillar-image {
+        object-position: center center;
+    }
+
+    &__pillar--sourcing .about-teaser__pillar-shade {
+        background:
+            linear-gradient(180deg, rgba(18, 17, 15, 0.08) 0%, rgba(18, 17, 15, 0.3) 52%, rgba(18, 17, 15, 0.7) 100%),
+            radial-gradient(circle at 50% 8%, rgba(246, 232, 200, 0.16), transparent 34%);
+    }
+
+    &__pillar-title {
+        margin-top: 20px;
+        color: $oatmeal;
+        line-height: normal;
+    }
+
+    &__pillar-subtitle {
+        margin-top: 6px;
+        color: $oatmeal;
+        white-space: nowrap;
+    }
+
+    &__logo {
+        position: absolute;
+        top: auto;
+        bottom: -28px;
+        left: 0;
+        width: 874px;
+        z-index: 0;
+        color: $brown-700;
+
+        svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            fill: currentColor;
+        }
+    }
+
+    @media (max-width: 1439px) {
+        &__logo {
+            width: min(55vw, 640px);
+            top: auto;
+            bottom: 36px;
+        }
+
+        &__content-inner {
+            width: min(100%, calc(100% - 64px));
+            padding: 72px 0 56px;
+        }
+
+        &__headline {
+            font-size: 54px;
+            white-space: normal;
+            line-height: 1.1;
+        }
+
+        &__body {
+            width: min(936px, 100%);
+            font-size: 18px;
+        }
+
+        &__divider {
+            margin: 20px auto 18px;
+        }
+
+        &__pillars {
+            width: min(1280px, 100%);
+            margin-top: 56px;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            gap: 40px 28px;
+        }
+
+        &__pillar {
+            width: min(300px, calc(50% - 14px));
+        }
+    }
+
+    @media (max-width: 1023px) {
+        height: auto;
+        min-height: auto;
+        padding: 88px clamp(20px, 4vw, 28px) 96px;
+
+        &__inner {
+            height: auto;
+        }
+
+        &__video-box {
+            position: relative;
+            top: auto;
+            left: auto;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            margin: 0 auto;
+            transform: none !important;
+        }
+
+        &__content {
+            position: relative;
+            inset: auto;
+            margin-top: 28px;
+        }
+
+        &__content-inner {
+            width: 100%;
+            min-height: auto;
+            padding: 0;
+            justify-content: flex-start;
+        }
+
+        &__headline {
+            font-size: clamp(42px, 7vw, 72px);
+        }
+
+        &__body {
+            font-size: clamp(16px, 2vw, 18px);
+        }
+
+        &__pillars {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        &__pillar {
+            width: 100%;
+            max-width: none;
+        }
+
+        &__pillar-subtitle {
+            white-space: normal;
+        }
+
+        &__logo {
+            width: min(54vw, 340px);
+            bottom: -12px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        padding: 72px clamp(16px, 4.83vw, 20px) 80px;
+
+        &__video-box {
+            aspect-ratio: 4 / 5;
+        }
+
+        &__content-inner {
+            width: 100%;
+            padding: 48px 20px 36px;
+        }
+
+        &__headline {
+            font-size: 38px;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        &__body {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        &__pillars {
+            width: 100%;
+            margin-top: 32px;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        &__pillar {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        &__pillar-visual {
+            width: 100%;
+            height: 260px;
+        }
+
+        &__pillar-subtitle {
+            white-space: normal;
+        }
+
+        &__logo {
+            width: min(78vw, 420px);
+            bottom: 16px;
+        }
+    }
+}

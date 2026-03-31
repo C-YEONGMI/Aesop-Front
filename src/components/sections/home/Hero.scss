@@ -1,0 +1,280 @@
+@use '../../../globals.scss' as *;
+
+.hero {
+    --hero-wordmark-aesop-width: 52.5%;
+    --hero-wordmark-ritual-width: 47.5%;
+    --hero-wordmark-bottom-offset: clamp(34px, 5.76vw, 110px);
+    --hero-scroll-distance: clamp(1320px, 156vh, 2480px);
+
+    position: relative;
+    width: 100%;
+    height: calc(100vh + var(--hero-scroll-distance));
+    min-height: clamp(1760px, 182vh, 2140px);
+    overflow: visible;
+
+    &.hero--handoff-complete {
+        height: 100vh;
+        min-height: 100vh;
+
+        .hero__stage {
+            position: relative;
+        }
+    }
+
+    &__stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        will-change: transform;
+    }
+
+    &__video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba($bg-overlay, 0.3) 0%,
+            rgba($bg-overlay, 0.1) 40%,
+            rgba($bg-overlay, 0.6) 100%
+        );
+    }
+
+    &__intro {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        overflow: hidden;
+        isolation: isolate;
+        pointer-events: auto;
+    }
+
+    &__intro-shell {
+        position: absolute;
+        inset: 0;
+        background: #120c08;
+        will-change: transform, opacity;
+    }
+
+    &__intro-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        transform: scale(1.01);
+        filter: saturate(0.96) contrast(1.03);
+    }
+
+    &__intro-tint {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(
+                180deg,
+                rgba(18, 12, 8, 0.18) 0%,
+                rgba(18, 12, 8, 0.04) 36%,
+                rgba(18, 12, 8, 0.52) 100%
+            ),
+            radial-gradient(
+                circle at 74% 46%,
+                rgba($oatmeal, 0.08) 0%,
+                rgba($oatmeal, 0.03) 18%,
+                rgba($oatmeal, 0) 44%
+            );
+        pointer-events: none;
+    }
+
+    &__intro-bloom {
+        position: absolute;
+        inset: -16%;
+        z-index: 1;
+        opacity: 0;
+        pointer-events: none;
+        background: radial-gradient(
+            circle at 74% 46%,
+            rgba($oatmeal, 0.5) 0%,
+            rgba($oatmeal, 0.14) 22%,
+            rgba($oatmeal, 0) 54%
+        );
+    }
+
+    &__intro-skip {
+        position: absolute;
+        bottom: clamp(22px, 2.5vw, 40px);
+        right: clamp(18px, 2.5vw, 40px);
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 72px;
+        min-height: 38px;
+        padding: 0 16px;
+        border: 1px solid rgba($oatmeal, 0.32);
+        border-radius: 4px;
+        background: rgba(18, 12, 8, 0.26);
+        color: rgba($oatmeal, 0.92);
+        font-size: 0.73rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        transition:
+            background-color 0.3s ease,
+            border-color 0.3s ease,
+            opacity 0.3s ease;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+            background: rgba(18, 12, 8, 0.42);
+            border-color: rgba($oatmeal, 0.52);
+        }
+    }
+
+    &__intro--transitioning {
+        .hero__intro-skip {
+            opacity: 0;
+        }
+    }
+
+    &__content {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        padding: 0;
+        color: $oatmeal;
+        will-change: opacity, transform;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__wordmark {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0;
+        width: 100%;
+        line-height: 0;
+        white-space: nowrap;
+        overflow: visible;
+        transform: translateY(calc(var(--hero-wordmark-bottom-offset) + 2vh));
+
+        svg {
+            fill: $oatmeal;
+            color: $oatmeal;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__wordmark-aesop {
+        display: block;
+        flex: 0 0 auto;
+        width: var(--hero-wordmark-aesop-width);
+        will-change: opacity;
+    }
+
+    &__wordmark-ritual {
+        display: block;
+        flex: 0 0 auto;
+        width: var(--hero-wordmark-ritual-width);
+        will-change: transform, opacity;
+    }
+
+    &__wordmark-flight {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1002;
+        pointer-events: none;
+        color: $oatmeal;
+        opacity: 0;
+        will-change: transform, opacity;
+
+        svg {
+            fill: currentColor;
+            color: currentColor;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__wordmark-flight-shell {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        isolation: isolate;
+        will-change: border-radius;
+    }
+
+    &__wordmark-flight-mark {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        will-change: clip-path, transform;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__wordmark-flight-mark--logo {
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        path {
+            fill: currentColor;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        --hero-wordmark-bottom-offset: clamp(24px, 4.8vw, 64px);
+        --hero-scroll-distance: clamp(900px, 116vh, 1580px);
+
+        min-height: clamp(1440px, 164vh, 1760px);
+
+        &__wordmark {
+            transform: translateY(calc(var(--hero-wordmark-bottom-offset) + 1.4vh));
+        }
+    }
+
+    @media (max-width: 767px) {
+        --hero-wordmark-bottom-offset: clamp(22px, 5.76vw, 42px);
+        --hero-scroll-distance: clamp(720px, 96vh, 1180px);
+
+        min-height: clamp(1280px, 140vh, 1500px);
+
+        &__wordmark {
+            transform: translateY(calc(var(--hero-wordmark-bottom-offset) + 1vh));
+        }
+
+        &__intro-skip {
+            bottom: 18px;
+            right: 16px;
+            min-width: 64px;
+            min-height: 34px;
+            padding: 0 14px;
+            font-size: 0.69rem;
+            letter-spacing: 0.14em;
+        }
+    }
+}

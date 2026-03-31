@@ -1,0 +1,72 @@
+@use '../../globals.scss' as *;
+
+.login-required-modal {
+    width: min(92vw, 460px);
+    padding: 36px 32px 28px;
+    border-radius: 4px;
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__eyebrow {
+        color: $brown-400;
+    }
+
+    &__title {
+        margin: 0;
+        color: $brown-900;
+    }
+
+    &__description {
+        margin: 0;
+        color: rgba($brown-700, 0.9);
+    }
+
+    &__actions {
+        margin-top: 28px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    &__button {
+        min-width: 120px;
+        height: 40px;
+        padding: 0 18px;
+        border-radius: 4px;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease;
+
+        &--secondary {
+            border: 1px solid rgba($brown-900, 0.18);
+            color: $brown-700;
+            background-color: transparent;
+        }
+
+        &--primary {
+            border: 1px solid $brown-900;
+            color: $oatmeal;
+            background-color: $brown-900;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .login-required-modal {
+        padding: 32px 20px 20px;
+
+        &__actions {
+            flex-direction: column-reverse;
+            align-items: stretch;
+        }
+
+        &__button {
+            width: 100%;
+        }
+    }
+}

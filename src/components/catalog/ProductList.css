@@ -1,0 +1,119 @@
+.aesop-container {
+    background-color: #fffef2;
+    /* 이솝 특유의 배경색 */
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* 카테고리 필터 탭 */
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.category-tab {
+    padding: 8px 20px;
+    border: 1px solid #999;
+    background: transparent;
+    color: #333;
+    font-size: 0.85rem;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-tab:hover {
+    background-color: #333;
+    color: #fffef2;
+    border-color: #333;
+}
+
+.category-tab.active {
+    background-color: #333;
+    color: #fffef2;
+    border-color: #333;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.product-card {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-box {
+    background-color: #f6f5f0;
+    padding: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-box img {
+    max-width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+.category-tag {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.name {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    font-family: 'Times New Roman', serif;
+}
+
+.desc {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.size-selector {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.size-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.size-btn.active {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    /* 이미지 바뀔 때 부드럽게 */
+}

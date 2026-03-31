@@ -1,0 +1,79 @@
+@use "../../../globals.scss" as *;
+
+/* ────────────────────────────────────────────────
+   Intro Copy 섹션 - Hero 직후 브랜드 카피
+──────────────────────────────────────────────── */
+.intro {
+    background-color: $bg-primary;
+    padding: 65px 0 64px;
+
+    &__inner {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+
+    /* 상단 뱃지: 별 아이콘 + 텍스트 + 세로 선 */
+    &__badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 425px;
+        max-width: 100%;
+        padding: 0;
+
+        /* SELECTED FAVOURITES 아래 세로 선 */
+        &::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 22px;
+            background-color: $brown-300;
+            margin-top: 0;
+        }
+    }
+
+    &__badge-star {
+        width: 23.95px;
+        height: 25.62px;
+    }
+
+    &__badge-text {
+        color: $brown-300;
+        text-align: center;
+    }
+
+    &__main {
+        width: 100%;
+        color: $brown-500;
+        line-height: 1.5;
+    }
+
+    &__sub {
+        width: 460px;
+        max-width: calc(100% - 40px);
+        color: $brown-300;
+        line-height: 1.5;
+    }
+
+    p span:last-child br {
+        display: none;
+    }
+
+    @media (max-width: 767px) {
+        padding: 56px 20px;
+
+        &__badge {
+            width: 100%;
+        }
+
+        &__sub {
+            max-width: 100%;
+        }
+    }
+}

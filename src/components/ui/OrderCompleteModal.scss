@@ -1,0 +1,137 @@
+@use '../../globals.scss' as *;
+
+.order-complete {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    color: $brown-900;
+    background-color: $oatmeal;
+    font-family: $font-suit;
+
+    &__header {
+        width: 100%;
+        gap: 8px;
+    }
+
+    &__eyebrow {
+        font-family: $font-optima;
+        color: rgba($brown-700, 0.72);
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+    }
+
+    /* ---- SVG animation ---- */
+    &__animation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 0;
+    }
+
+    &__svg {
+        overflow: visible;
+    }
+
+    &__circle {
+        stroke-dasharray: 207.35;
+        stroke-dashoffset: 207.35;
+        animation: order-circle-draw 0.7s ease-in-out forwards;
+    }
+
+    &__check {
+        stroke-dasharray: 42;
+        stroke-dashoffset: 42;
+        animation: order-check-draw 0.5s ease-in-out 0.7s forwards;
+    }
+
+    /* ---- Text ---- */
+    &__text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    &__main {
+        margin: 0;
+        color: $brown-700;
+        font-family: $font-suit;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    &__sub {
+        margin: 0;
+        color: rgba($brown-700, 0.68);
+        line-height: 1.7;
+        max-width: none;
+    }
+
+    /* ---- Buttons ---- */
+    &__actions {
+        width: 100%;
+    }
+
+    &__button {
+        font-family: inherit;
+        min-height: 46px;
+        padding: 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid $brown-700;
+        cursor: pointer;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease;
+
+        &--primary {
+            background-color: $brown-700;
+            color: $oatmeal;
+
+            &:hover {
+                background-color: $brown-500;
+                border-color: $brown-500;
+            }
+        }
+
+        &--secondary {
+            background-color: transparent;
+            color: $brown-700;
+
+            &:hover {
+                background-color: rgba($brown-100, 0.28);
+                border-color: $brown-500;
+                color: $brown-500;
+            }
+        }
+    }
+}
+
+@keyframes order-circle-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes order-check-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .order-complete {
+        padding: 28px 20px 20px;
+        gap: 22px;
+
+        &__button {
+            width: 100%;
+        }
+    }
+}

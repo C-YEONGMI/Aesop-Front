@@ -1,0 +1,60 @@
+.rolling-number {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    vertical-align: baseline;
+
+    &__visual {
+        display: inline-flex;
+        align-items: baseline;
+    }
+
+    &__digit {
+        position: relative;
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: center;
+        width: 0.68em;
+        height: 1em;
+        overflow: hidden;
+        line-height: 1;
+    }
+
+    &__digit-track {
+        display: flex;
+        flex-direction: column;
+        will-change: transform;
+    }
+
+    &__digit-cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 0.68em;
+        height: 1em;
+        line-height: 1;
+    }
+
+    &__separator {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 1em;
+        line-height: 1;
+        margin-inline: -0.04em;
+    }
+
+    &__sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+}

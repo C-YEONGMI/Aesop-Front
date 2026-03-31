@@ -1,0 +1,37 @@
+@use '../../../globals.scss' as *;
+
+.add-to-cart-button {
+    @extend .suit-18-m;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--add-to-cart-button-width, auto);
+    min-width: 0;
+    height: 50px;
+    padding: 0 12px;
+    border: 0;
+    background-color: $brown-500;
+    color: $oatmeal;
+    white-space: nowrap;
+    text-align: center;
+    transition: background-color 0.25s ease, color 0.25s ease;
+
+    &:hover {
+        background-color: $brown-800;
+    }
+
+    &:disabled {
+        background-color: $brown-300;
+        color: rgba($oatmeal, 0.9);
+        cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+        background-color: $brown-300;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($brown-800, 0.35);
+        outline-offset: 2px;
+    }
+}

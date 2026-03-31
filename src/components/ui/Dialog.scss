@@ -1,0 +1,144 @@
+@use '../../globals.scss' as *;
+
+.ui-dialog {
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1600;
+        background: rgba($bg-overlay, 0.42);
+        backdrop-filter: blur(4px);
+
+        &[data-state='open'] {
+            animation: ui-dialog-overlay-in 0.24s ease forwards;
+        }
+
+        &[data-state='closed'] {
+            animation: ui-dialog-overlay-out 0.18s ease forwards;
+        }
+    }
+
+    &__content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 1601;
+        width: min(92vw, 640px);
+        max-height: calc(100vh - 48px);
+        overflow-y: auto;
+        transform: translate(-50%, -50%);
+        border: 1px solid rgba($brown-900, 0.14);
+        background-color: $oatmeal;
+        box-shadow: 0 24px 80px rgba($bg-overlay, 0.18);
+        outline: none;
+
+        &[data-state='open'] {
+            animation: ui-dialog-content-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        &[data-state='closed'] {
+            animation: ui-dialog-content-out 0.2s ease forwards;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        color: $brown-700;
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+
+        &:hover {
+            background-color: rgba($brown-100, 0.4);
+            border-color: rgba($brown-900, 0.08);
+            color: $brown-900;
+        }
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    &__title {
+        color: $brown-900;
+    }
+
+    &__description {
+        color: rgba($brown-700, 0.9);
+    }
+}
+
+@keyframes ui-dialog-overlay-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ui-dialog-overlay-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes ui-dialog-content-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 18px)) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes ui-dialog-content-out {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 12px)) scale(0.98);
+    }
+}
+
+@media (max-width: 640px) {
+    .ui-dialog {
+        &__content {
+            width: min(100vw - 24px, 640px);
+        }
+
+        &__footer {
+            flex-direction: column-reverse;
+            align-items: stretch;
+        }
+    }
+}

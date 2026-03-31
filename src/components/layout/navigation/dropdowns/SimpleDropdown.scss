@@ -1,0 +1,63 @@
+@use '../../../../globals.scss' as *;
+
+/* ==================
+   Simple Dropdown (Discover, Benefits)
+================== */
+.simple-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $brown-50;
+    min-width: 200px;
+    padding: 16px 20px 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 0 0 4px 4px;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+
+    /* 진입 애니메이션 — 렌더 시 즉시 표시 (조건부 렌더링이므로) */
+    animation: simpleDropdownIn 0.25s ease forwards;
+}
+
+@keyframes simpleDropdownIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.simple-dropdown__link {
+    @extend .optima-16;
+    color: $brown-700;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+
+    &:hover {
+        color: $brown-900;
+    }
+}
+
+/* transparent 모드 */
+#header.transparent .simple-dropdown {
+    background-color: $brown-900;
+}
+
+#header.transparent .simple-dropdown__link {
+    color: $brown-100;
+
+    &:hover {
+        color: $oatmeal;
+    }
+}

@@ -1,0 +1,155 @@
+@use '../../../../globals.scss' as *;
+
+/* ==================
+   Mega Menu (Products)
+================== */
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: $brown-50;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease;
+    z-index: 100;
+    overflow: hidden;
+
+    /* 부모 li가 active 일 때 표시 — DesktopNav에서 직접 렌더링하므로 항상 보이게 */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mega-menu__logo {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: auto;
+    opacity: 0.15;
+    fill: $brown-500;
+    color: $brown-500;
+    pointer-events: none;
+}
+
+.mega-menu__inner {
+    max-width: 960px;
+    padding: 36px 4% 40px;
+    margin-left: 140px;
+}
+
+.mega-menu__top-row,
+.mega-menu__bottom-row {
+    display: grid;
+    gap: 32px;
+}
+
+.mega-menu__top-row {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.mega-menu__bottom-row {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.mega-menu__divider {
+    border: none;
+    border-top: 1px solid $brown-200;
+    margin: 28px 0;
+}
+
+.mega-menu__column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mega-menu__category-title {
+    @extend .optima-16;
+    font-weight: 600;
+    color: $brown-900;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    padding-bottom: 4px;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.mega-menu__sub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mega-menu__sub-link {
+    font-family: $font-optima;
+    font-size: 14px;
+    color: $brown-700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    line-height: 1.5;
+    display: inline-block;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        border-bottom: 1px solid $brown-900;
+        transition: width 0.3s ease;
+    }
+
+    &:hover {
+        color: $brown-900;
+
+        &::after {
+            width: 100%;
+        }
+    }
+}
+
+/* transparent 모드 */
+#header.transparent .mega-menu {
+    background-color: $brown-900;
+}
+
+#header.transparent .mega-menu__category-title {
+    color: $oatmeal;
+}
+
+#header.transparent .mega-menu__sub-link {
+    color: $brown-200;
+
+    &::after {
+        border-bottom-color: $oatmeal;
+    }
+
+    &:hover {
+        color: $oatmeal;
+    }
+}
+
+#header.transparent .mega-menu__logo {
+    fill: $oatmeal;
+    color: $oatmeal;
+    opacity: 0.5;
+}
+
+#header.transparent .mega-menu__divider {
+    border-top-color: $brown-700;
+}

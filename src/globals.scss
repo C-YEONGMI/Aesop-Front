@@ -1,0 +1,462 @@
+/* 1. Optima */
+@import url('https://fonts.cdnfonts.com/css/optima');
+
+/* 2. Montage */
+@font-face {
+    font-family: 'Montage';
+    src:
+        url('./assets/Montage.woff2') format('woff2'),
+        url('./assets/Montage.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 3. SUIT Variable */
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css');
+
+// ============================================
+// Color Tokens (SCSS Variables)
+// ============================================
+
+// --------------------------------------------
+// Brown Palette
+// --------------------------------------------
+
+$brown-50: #f1efec; // rgb(241, 239, 236)
+$brown-100: #d5cec5; // rgb(213, 206, 197)
+$brown-200: #c0b6a9; // rgb(192, 182, 169)
+$brown-300: #a49582; // rgb(164, 149, 130)
+$brown-400: #928169; // rgb(146, 129, 105)
+$brown-500: #776144; // rgb(119, 97, 68)
+$brown-600: #6c583e; // rgb(108, 88, 62)
+$brown-700: #544530; // rgb(84, 69, 48)
+$brown-800: #413525; // rgb(65, 53, 37)
+$brown-900: #32291d; // rgb(50, 41, 29)
+
+// --------------------------------------------
+// Base Colors
+// --------------------------------------------
+
+$oatmeal: #fffbf3; // rgb(255, 251, 243)
+
+// --------------------------------------------
+// Background Colors
+// --------------------------------------------
+
+$bg-primary: #eee5da; // rgb(238, 229, 218)
+$bg-product: #decbbc; // rgb(222, 203, 188)
+$bg-overlay: #12110f; // rgb(18, 17, 15)
+
+// ============================================
+// Color Map (for programmatic access)
+// ============================================
+
+$brown-colors: (
+    '50': $brown-50,
+    '100': $brown-100,
+    '200': $brown-200,
+    '300': $brown-300,
+    '400': $brown-400,
+    '500': $brown-500,
+    '600': $brown-600,
+    '700': $brown-700,
+    '800': $brown-800,
+    '900': $brown-900,
+);
+
+$bg-colors: (
+    'primary': $bg-primary,
+    'product': $bg-product,
+    'overlay': $bg-overlay,
+);
+
+// --------------------------------------------
+// Point Colors
+// --------------------------------------------
+$point-pink: #e69579; //rgb(230,149,121)
+$point-green: #a3b18a; //rgb(163,177,138)
+
+// ============================================
+// Utility Classes
+// ============================================
+
+// Brown text colors
+@each $key, $value in $brown-colors {
+    .text-brown-#{$key} {
+        color: $value;
+    }
+}
+
+// Brown background colors
+@each $key, $value in $brown-colors {
+    .bg-brown-#{$key} {
+        background-color: $value;
+    }
+}
+
+// Background utility classes
+.bg-primary {
+    background-color: $bg-primary;
+}
+
+.bg-product {
+    background-color: $bg-product;
+}
+
+.bg-overlay {
+    background-color: $bg-overlay;
+}
+
+.bg-oatmeal {
+    background-color: $oatmeal;
+}
+
+// ============================================
+// Font Family Variables
+// ============================================
+
+$font-montage: 'Montage', sans-serif;
+$font-suit: 'SUIT Variable', sans-serif;
+$font-optima: 'Optima', 'Segoe UI', 'Candara', Geneva, sans-serif;
+
+// ============================================
+// Responsive Tokens
+// ============================================
+
+$desktop-reference-width: 1920px;
+$tablet-reference-width: 768px;
+$mobile-reference-width: 360px;
+
+$breakpoint-desktop-wide: 1439px;
+$breakpoint-desktop: 1439px;
+$breakpoint-tablet: 1023px;
+$breakpoint-mobile: 767px;
+$breakpoint-mobile-small: 359px;
+
+@mixin desktop-wide {
+    @media (min-width: #{$desktop-reference-width}) {
+        @content;
+    }
+}
+
+@mixin desktop-down {
+    @media (max-width: #{$breakpoint-desktop}) {
+        @content;
+    }
+}
+
+@mixin tablet-down {
+    @media (max-width: #{$breakpoint-tablet}) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: #{$breakpoint-mobile}) {
+        @content;
+    }
+}
+
+@mixin mobile-small {
+    @media (max-width: #{$breakpoint-mobile-small}) {
+        @content;
+    }
+}
+
+:root {
+    --page-gutter: clamp(20px, 3.75vw, 72px);
+    --page-gutter-wide: clamp(24px, 6vw, 120px);
+    --page-gutter-narrow: clamp(16px, 2.5vw, 32px);
+    --content-max: 1580px;
+    --layout-max: 1680px;
+    --section-space-lg: clamp(72px, 6.25vw, 120px);
+    --section-space-md: clamp(56px, 4.8vw, 88px);
+    --section-space-sm: clamp(40px, 3.6vw, 64px);
+}
+
+// ============================================
+// Text Styles
+// ============================================
+
+// --------------------------------------------
+// Montage Styles
+// --------------------------------------------
+
+.montage-220 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(120px, 11.46vw, 220px);
+    line-height: normal;
+    letter-spacing: clamp(-2.4px, -0.23vw, -4.4px);
+}
+
+.montage-100 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(64px, 5.2vw, 100px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+.montage-128 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(72px, 6.67vw, 128px);
+    line-height: normal;
+    letter-spacing: 0px;
+}
+
+.montage-80 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(48px, 4.17vw, 80px);
+    line-height: 1;
+}
+
+.montage-48 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(34px, 2.5vw, 48px);
+    line-height: normal;
+}
+
+.montage-32 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(24px, 1.67vw, 32px);
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.montage-30 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(24px, 1.56vw, 30px);
+    line-height: normal;
+}
+
+.montage-24 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(20px, 1.25vw, 24px);
+    line-height: normal;
+}
+
+.montage-18 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 2.34px;
+    text-transform: uppercase;
+}
+
+.montage-16 {
+    font-family: $font-montage;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+// --------------------------------------------
+// SUIT Variable Styles
+// --------------------------------------------
+
+.suit-80-el {
+    font-family: $font-suit;
+    font-weight: 200;
+    font-size: clamp(42px, 4.17vw, 80px);
+    line-height: 1;
+}
+
+.suit-26-sb {
+    font-family: $font-suit;
+    font-weight: 600;
+    font-size: clamp(22px, 1.35vw, 26px);
+    line-height: 1.5;
+}
+
+.suit-24-r {
+    font-family: $font-suit;
+    font-weight: 400;
+    font-size: clamp(20px, 1.25vw, 24px);
+    line-height: 1.5;
+}
+
+.suit-24-sb {
+    font-family: $font-suit;
+    font-weight: 600;
+    font-size: clamp(20px, 1.25vw, 24px);
+    line-height: 1.5;
+}
+
+.suit-20-l {
+    font-family: $font-suit;
+    font-weight: 300;
+    font-size: clamp(17px, 1.04vw, 20px);
+    line-height: 1.5;
+}
+
+.suit-20-m {
+    font-family: $font-suit;
+    font-weight: 500;
+    font-size: clamp(17px, 1.04vw, 20px);
+    line-height: 1.5;
+}
+
+.suit-18-r {
+    font-family: $font-suit;
+    font-weight: 400;
+    font-size: clamp(16px, 0.94vw, 18px);
+    line-height: 1.5;
+}
+
+.suit-18-m {
+    font-family: $font-suit;
+    font-weight: 500;
+    font-size: clamp(16px, 0.94vw, 18px);
+    line-height: 1.5;
+}
+
+.suit-16-r {
+    font-family: $font-suit;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.suit-14-m {
+    font-family: $font-suit;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.suit-12-r {
+    font-family: $font-suit;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+// --------------------------------------------
+// Optima Styles
+// --------------------------------------------
+
+.optima-220 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(120px, 11.46vw, 220px);
+    line-height: 1.5;
+    letter-spacing: clamp(-2.4px, -0.23vw, -4.4px);
+}
+
+.optima-70 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(42px, 3.65vw, 70px);
+    line-height: 1.5;
+}
+.optima-48 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(34px, 2.5vw, 48px);
+    line-height: normal;
+}
+
+.optima-40 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(28px, 2.08vw, 40px);
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+.optima-20 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(17px, 1.04vw, 20px);
+    line-height: normal;
+}
+
+.optima-18 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.optima-16 {
+    font-family: $font-optima;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+// ============================================
+// Layout & Reset Styles
+// ============================================
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+}
+
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
+#root {
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+}
+
+body {
+    /* 폰트는 본문용 SUIT Variable (구현 기준서 참조) */
+    font-family: $font-suit;
+    color: $brown-900;
+    background-color: $oatmeal;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-gutter: stable;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}

@@ -1,0 +1,64 @@
+@use "../../globals.scss" as *;
+
+/* Main.jsx가 홈 섹션 조립자 역할만 하도록
+ * 개별 섹션이 자체 padding을 관리하므로 여기서는 레이아웃만 정의 */
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* 각 섹션 컴포넌트가 자체적으로 padding을 관리 */
+}
+
+/* ==================
+   BEST PRODUCTS 섹션 
+================== */
+.best-products-section {
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 0 4%;
+    /* 헤더 및 푸터와 동일한 좌우 여백 */
+    display: flex;
+    flex-direction: column;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+
+    /* 중앙 정렬을 위한 가상 요소 (flex 비율 활용) */
+    &::before {
+        content: '';
+        flex: 1;
+    }
+
+    h2 {
+        @extend .optima-40;
+        color: $brown-700;
+        text-align: center;
+        flex: 1;
+    }
+
+    .more-btn-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.product-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    /* 카드 사이 간격 */
+    width: 100%;
+
+    /* 가운데 카드(BestpdLg)가 수직 기준 중앙에 오도록 */
+    .product-box {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,310 @@
+@use "sass:color";
+@use "../../globals.scss" as *;
+
+.signup-page {
+    min-height: 100vh;
+    background: $bg-primary;
+
+    &__header-space {
+        height: 70px;
+    }
+
+    &__shell {
+        width: min(1460px, calc(100% - (var(--page-gutter) * 2)));
+        margin: 0 auto;
+        padding: 56px 0 120px;
+    }
+
+    &__panel {
+        width: min(520px, 100%);
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    &__intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    &__intro-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__intro > .signup-page__title,
+    &__intro > .signup-page__copy {
+        display: none;
+    }
+
+    &__title {
+        color: $brown-800;
+    }
+
+    &__hero-title {
+        margin: 0;
+        color: $brown-700;
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+    }
+
+    &__hero-subtitle {
+        margin: 0;
+        color: rgba($brown-400, 0.92);
+    }
+
+    &__copy {
+        color: $brown-500;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__label-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    &__label,
+    &__optional,
+    &__hint {
+        letter-spacing: 0.08em;
+    }
+
+    &__label {
+        color: $brown-600;
+        text-transform: uppercase;
+        padding-top: 6px;
+    }
+
+    &__optional,
+    &__hint {
+        color: rgba($brown-400, 0.88);
+    }
+
+    &__control {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    &__control--date {
+        align-items: stretch;
+        overflow: visible;
+    }
+
+    &__control-surface {
+        width: 100%;
+        min-height: 48px;
+        border: 0;
+        border-bottom: 1px solid rgba($brown-200, 0.92);
+        background: transparent;
+        color: $brown-800;
+        outline: none;
+        padding: 0 0 10px;
+        transition:
+            border-color 0.2s ease,
+            color 0.2s ease,
+            background-color 0.2s ease;
+
+        &::placeholder {
+            color: rgba($brown-300, 0.92);
+        }
+
+        &:disabled {
+            color: rgba($brown-300, 0.96);
+            cursor: not-allowed;
+        }
+    }
+
+    &__control-surface--active {
+        border-bottom-color: $brown-500;
+    }
+
+    &__control-surface--error {
+        border-bottom-color: $point-pink;
+    }
+
+    &__date-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    &__date-trigger-value {
+        color: rgba($brown-300, 0.96);
+        letter-spacing: 0.04em;
+    }
+
+    &__date-trigger-value--filled {
+        color: $brown-800;
+    }
+
+    &__date-trigger-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    &__date-trigger-icon,
+    &__date-trigger-chevron {
+        color: rgba($brown-400, 0.94);
+    }
+
+    &__date-popover {
+        position: absolute;
+        top: calc(100% + 16px);
+        left: 0;
+        z-index: 12;
+        width: min(100%, 320px);
+    }
+
+    &__icon-button {
+        color: rgba($brown-400, 0.94);
+    }
+
+    &__icon-button {
+        position: absolute;
+        right: 0;
+        bottom: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $brown-700;
+        }
+    }
+
+    &__select-trigger {
+        min-height: 48px;
+        padding: 0 0 10px;
+        border: 0;
+        border-bottom: 1px solid rgba($brown-200, 0.92);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+
+        &:focus-visible,
+        &[data-state='open'] {
+            border-color: transparent;
+            border-bottom-color: $brown-500;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .aesop-select__trigger-icon {
+            color: rgba($brown-400, 0.94);
+        }
+    }
+
+    &__select-content {
+        min-width: min(320px, calc(100vw - 32px));
+    }
+
+    &__message {
+        color: $brown-400;
+    }
+
+    &__message--error {
+        color: color.mix($point-pink, $brown-700, 72%);
+    }
+
+    &__message--success {
+        color: color.mix($point-green, $brown-700, 68%);
+    }
+
+    &__divider {
+        height: 1px;
+        margin: 12px 0 2px;
+        background: linear-gradient(
+            90deg,
+            rgba($brown-200, 0) 0%,
+            rgba($brown-200, 0.96) 50%,
+            rgba($brown-200, 0) 100%
+        );
+    }
+
+    &__submit {
+        width: 100%;
+        height: 52px;
+        background: $brown-500;
+        color: $oatmeal;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background: $brown-800;
+        }
+    }
+
+    &__footer {
+        margin-top: 18px;
+        text-align: center;
+        color: $brown-400;
+    }
+
+    &__footer-link {
+        color: $brown-600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $brown-800;
+        }
+    }
+
+    @media (max-width: 767px) {
+        &__shell {
+            width: min(100%, calc(100% - (clamp(16px, 4.83vw, 20px) * 2)));
+            padding: 40px 0 88px;
+        }
+
+        &__panel {
+            padding: 0;
+        }
+
+        &__intro {
+            margin-bottom: 32px;
+        }
+
+        &__hero-title {
+            font-size: 64px;
+        }
+
+        &__label-row {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        &__date-popover {
+            width: min(100vw - 32px, 320px);
+        }
+    }
+}

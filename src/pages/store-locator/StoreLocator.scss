@@ -1,0 +1,182 @@
+@use "../../globals.scss" as *;
+
+.store-locator {
+    background-color: $bg-primary;
+    min-height: 100vh;
+
+    &__header-space { height: 70px; }
+
+    &__inner { width: min(1200px, calc(100% - (var(--page-gutter) * 2))); margin: 0 auto; padding: 60px 0 100px; }
+
+    &__title-area { margin-bottom: 48px; }
+    &__title { color: $brown-800; margin-bottom: 12px; }
+    &__desc { color: $brown-500; }
+
+    /* 필터 */
+    &__filters {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+
+    &__region-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    &__region-btn {
+        padding: 8px 16px;
+        border: 1px solid $brown-200;
+        background: none;
+        color: $brown-500;
+        cursor: pointer;
+        font-family: $font-suit;
+        transition: all 0.2s;
+
+        &.active, &:hover {
+            background-color: $brown-800;
+            color: $oatmeal;
+            border-color: $brown-800;
+        }
+    }
+
+    &__search {
+        input {
+            width: 100%;
+            max-width: 460px;
+            padding: 12px 16px;
+            border: 1px solid $brown-200;
+            background: $bg-primary;
+            color: $brown-800;
+            outline: none;
+            font-family: $font-suit;
+            transition: border-color 0.2s;
+
+            &:focus { border-color: $brown-500; }
+            &::placeholder { color: $brown-200; }
+        }
+    }
+
+    /* 레이아웃 */
+    &__layout {
+        display: grid;
+        grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+        gap: clamp(24px, 4vw, 40px);
+        align-items: start;
+
+        @media (max-width: 1023px) { grid-template-columns: 1fr; }
+    }
+
+    /* 목록 */
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        max-height: 700px;
+        overflow-y: auto;
+        border: 1px solid $brown-100;
+    }
+
+    &__empty { color: $brown-300; padding: 40px; text-align: center; }
+
+    &__card {
+        padding: 20px 24px;
+        border-bottom: 1px solid $brown-100;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover, &.active {
+            background-color: $bg-primary;
+        }
+
+        &:last-child { border-bottom: none; }
+    }
+
+    &__card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    &__card-name { color: $brown-800; }
+    &__card-region { color: $brown-400; margin-left: auto; }
+    &__card-addr { color: $brown-500; margin-bottom: 4px; }
+    &__card-hours { color: $brown-300; }
+
+    /* 상세 */
+    &__detail {
+        padding: 32px;
+        background-color: $bg-primary;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+        min-height: 400px;
+
+        &-empty {
+            color: $brown-300;
+            margin: auto;
+            text-align: center;
+        }
+    }
+
+    &__detail-name { color: $brown-800; margin: 0; }
+
+    &__map {
+        width: 100%;
+        max-width: 100%;
+        align-self: stretch;
+        flex: 0 0 auto;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border: 1px solid rgba($brown-100, 0.95);
+        background: rgba($oatmeal, 0.42);
+    }
+
+    &__map-frame {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+        filter: saturate(0.92) sepia(0.06);
+    }
+
+    &__detail-info { display: flex; flex-direction: column; gap: 12px; }
+
+    &__detail-row {
+        display: flex;
+        gap: 16px;
+        color: $brown-600;
+
+        a {
+            color: $brown-600;
+            text-decoration: none;
+            &:hover { color: $brown-800; }
+        }
+    }
+
+    &__detail-label { color: $brown-400; min-width: 72px; @extend .suit-14-m; }
+
+    &__detail-desc { color: $brown-500; line-height: 1.8; }
+
+    &__services { display: flex; flex-direction: column; gap: 10px; }
+
+    &__service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    &__service-tag {
+        background-color: $brown-100;
+        color: $brown-600;
+        padding: 4px 10px;
+    }
+
+    @media (max-width: 767px) {
+        &__inner {
+            width: min(100%, calc(100% - (clamp(16px, 4.83vw, 20px) * 2)));
+            padding: 48px 0 80px;
+        }
+
+        &__detail {
+            padding: 24px 20px;
+            gap: 20px;
+        }
+
+        &__detail-row {
+            flex-direction: column;
+            gap: 6px;
+        }
+    }
+}

@@ -1,0 +1,185 @@
+@use '../../globals.scss' as *;
+
+.aesop-select {
+    &__trigger {
+        width: 100%;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 14px;
+        border: 1px solid rgba($brown-200, 0.94);
+        border-radius: 4px;
+        background: rgba($oatmeal, 0.96);
+        color: $brown-800;
+        box-shadow:
+            0 8px 24px rgba($brown-900, 0.06),
+            inset 0 1px 0 rgba($oatmeal, 0.92);
+        outline: none;
+        transition:
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            box-shadow 0.2s ease,
+            color 0.2s ease;
+
+        &[data-placeholder] {
+            color: rgba($brown-400, 0.82);
+        }
+
+        &:focus-visible,
+        &[data-state='open'] {
+            border-color: rgba($brown-500, 0.84);
+            background: rgba($oatmeal, 1);
+            box-shadow:
+                0 10px 28px rgba($brown-900, 0.08),
+                0 0 0 3px rgba($brown-200, 0.22);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        > span {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &__trigger-icon {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        color: rgba($brown-400, 0.92);
+    }
+
+    &__content {
+        position: relative;
+        z-index: 80;
+        min-width: calc(var(--radix-select-trigger-width) + 4px);
+        max-height: min(24rem, var(--radix-select-content-available-height));
+        overflow: hidden;
+        border: 1px solid rgba($brown-200, 0.96);
+        border-radius: 4px;
+        background: rgba($oatmeal, 0.98);
+        color: $brown-800;
+        box-shadow:
+            0 24px 56px rgba($brown-900, 0.12),
+            inset 0 1px 0 rgba($oatmeal, 0.94);
+        transform-origin: var(--radix-select-content-transform-origin);
+        animation: aesop-select-fade-in 0.18s ease-out;
+        -webkit-tap-highlight-color: transparent;
+
+        &::selection {
+            background: rgba($brown-200, 0.9);
+            color: $brown-900;
+        }
+    }
+
+    &__viewport {
+        padding: 6px;
+    }
+
+    &__scroll-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 28px;
+        color: rgba($brown-500, 0.9);
+        background: rgba($bg-primary, 0.78);
+    }
+
+    &__label {
+        padding: 10px 12px 6px 32px;
+        color: rgba($brown-400, 0.9);
+        font-family: $font-suit;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    &__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 40px;
+        padding: 9px 12px 9px 34px;
+        border-radius: 4px;
+        color: $brown-700;
+        font-family: $font-suit;
+        font-size: 14px;
+        line-height: 1.4;
+        outline: none;
+        cursor: default;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+            background-color 0.16s ease,
+            color 0.16s ease;
+
+        &[data-highlighted] {
+            background: rgba($brown-100, 0.72);
+            color: $brown-900;
+        }
+
+        &[data-state='checked'] {
+            background: rgba($brown-700, 0.94);
+            color: $oatmeal;
+        }
+
+        &[data-state='checked'][data-highlighted] {
+            background: rgba($brown-800, 0.96);
+            color: $oatmeal;
+        }
+
+        &[data-disabled] {
+            opacity: 0.44;
+            pointer-events: none;
+        }
+
+        &::selection {
+            background: rgba($brown-200, 0.9);
+            color: $brown-900;
+        }
+    }
+
+    &__item[data-state='checked'] &__item-indicator {
+        color: $oatmeal;
+    }
+
+    &__item-indicator {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: $brown-600;
+    }
+
+    &__separator {
+        height: 1px;
+        margin: 6px 6px;
+        background: rgba($brown-100, 0.92);
+    }
+}
+
+@keyframes aesop-select-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

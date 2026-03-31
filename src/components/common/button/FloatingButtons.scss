@@ -1,0 +1,146 @@
+@use "../../../globals.scss" as *;
+
+.floating-buttons {
+    position: fixed;
+    bottom: clamp(20px, 2.5vw, 40px);
+    right: clamp(20px, 2.5vw, 40px);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.btn-top,
+.floating-btn-group {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+
+.floating-btn {
+    width: clamp(32px, 2.08vw, 40px);
+    height: clamp(32px, 2.08vw, 40px);
+    border-radius: 50%;
+    background-color: $brown-900;
+    color: $oatmeal;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.24s ease, background-color 0.24s ease;
+
+    svg {
+        width: clamp(16px, 1.04vw, 20px);
+        height: clamp(16px, 1.04vw, 20px);
+    }
+
+    &.is-inverted {
+        background-color: $oatmeal;
+        color: $brown-900;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+}
+
+.floating-btn-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+
+    &.is-open {
+        .chat-label {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(6px);
+        }
+    }
+}
+
+.btn-chat {
+    background: $brown-900;
+    box-shadow: 0 12px 28px rgba($brown-900, 0.24);
+
+    svg {
+        transition: transform 0.28s ease;
+    }
+
+    &:hover {
+        transform: translateY(-2px) scale(1.03);
+        opacity: 1;
+        box-shadow: 0 18px 34px rgba($brown-900, 0.3);
+    }
+
+    &.is-active {
+        background: $brown-800;
+        box-shadow: 0 18px 38px rgba($brown-900, 0.34);
+
+        svg {
+            transform: rotate(90deg);
+        }
+    }
+
+    &.is-inverted.is-active {
+        background: $brown-100;
+        color: $brown-900;
+    }
+}
+
+.btn-top {
+    background: $brown-900;
+    box-shadow: 0 12px 28px rgba($brown-900, 0.22);
+
+    svg {
+        transition: transform 0.28s ease;
+    }
+
+    &:hover {
+        transform: translateY(-2px) scale(1.03);
+        opacity: 1;
+        box-shadow: 0 18px 34px rgba($brown-900, 0.28);
+
+        svg {
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.chat-label {
+    @extend .suit-16-r;
+    color: $brown-900;
+    font-size: clamp(14px, 1vw, 18px);
+    text-align: center;
+    white-space: nowrap;
+    transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
+}
+
+@media (max-width: 767px) {
+    .floating-buttons {
+        bottom: 16px;
+        right: 16px;
+        z-index: 1200;
+    }
+
+    .btn-top,
+    .floating-btn-group,
+    .btn-top.visible,
+    .floating-btn-group.visible {
+        transform: none;
+    }
+}

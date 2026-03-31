@@ -1,0 +1,159 @@
+@use "../../globals.scss" as *;
+
+.expandable-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+/* 모바일: 40×40 터치영역, 아이콘 24px */
+@media (max-width: 767px) {
+  .expandable-search {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .search-toggle-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* 닫혀있을 때 / 열려있을 때의 기본 토글 버튼 */
+.search-toggle-btn {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit; /* Header/Header_wh 텍스트 색상 상속 */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.search-toggle-btn--open {
+  inset: auto;
+  top: 50%;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+  color: $brown-700;
+}
+
+/* 펼쳐진 상태의 검색 폼 */
+.search-form {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  border-radius: 4px;
+  background-color: transparent;
+  border: 1.5px solid currentColor; /* 헤더 텍스트 색상 상속 */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  &--expand-left {
+    right: 0;
+    flex-direction: row-reverse;
+  }
+  
+  &--expand-right {
+    left: 0;
+  }
+}
+
+/* 검색 제출 버튼 (돋보기 아이콘) */
+.search-submit-btn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: $brown-700;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form--expand-left .search-submit-btn {
+  left: 12px;
+  right: auto;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: $oatmeal;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  color: $brown-700;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  
+  /* 숨긴 placeholder (AnimatePresence 커스텀 모션용) */
+  &::placeholder {
+    color: transparent;
+  }
+  
+  &--left {
+    padding-left: 48px;
+    padding-right: 40px;
+  }
+  
+  &--right {
+    padding-left: 40px;
+    padding-right: 20px;
+  }
+}
+
+.search-placeholder {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: $brown-700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-family: $font-suit;
+  opacity: 0.8;
+  user-select: none;
+  
+  &--left {
+    left: 48px;
+    right: 40px;
+    width: auto;
+  }
+  
+  &--right {
+    left: 40px;
+  }
+}

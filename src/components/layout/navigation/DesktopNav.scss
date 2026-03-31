@@ -1,0 +1,51 @@
+@use '../../../globals.scss' as *;
+
+/* ==================
+   Desktop GNB
+================== */
+.gnb-desktop {
+    flex: 1;
+    min-width: 0;
+}
+
+.gnb-depth1 {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 10px 12px;
+}
+
+@media (max-width: 1439px) {
+    .gnb-depth1 {
+        gap: 6px;
+    }
+
+    .gnb-depth1__link {
+        padding: 12px 6px;
+        font-size: 14px;
+    }
+}
+
+.gnb-depth1__item {
+    position: relative;
+}
+
+.gnb-depth1__link {
+    text-decoration: none;
+    color: $brown-900;
+    @extend .optima-16;
+    transition: opacity 0.3s ease;
+    display: inline-block;
+    padding: 12px 10px;
+    white-space: nowrap;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+/* transparent 모드 (Header에서 클래스 상속) */
+#header.transparent .gnb-depth1__link {
+    color: $oatmeal;
+}

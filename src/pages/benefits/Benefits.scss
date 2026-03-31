@@ -1,0 +1,37 @@
+@use "../../globals.scss" as *;
+
+.benefits-page {
+    min-height: 100vh;
+    background-color: $bg-primary;
+    overflow-x: clip;
+
+    &__header-space {
+        height: 70px;
+    }
+
+    &__section {
+        width: min(100%, 1580px);
+        margin: 0 auto;
+        padding: 48px 32px 120px;
+
+        p {
+            color: $brown-600;
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .benefits-page {
+        &__section {
+            padding: 36px 24px 96px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .benefits-page {
+        &__section {
+            padding: 28px 20px 80px;
+        }
+    }
+}

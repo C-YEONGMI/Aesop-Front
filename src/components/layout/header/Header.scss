@@ -1,0 +1,255 @@
+/* src/components/layout/header/Header.scss */
+@use '../../../globals.scss' as *;
+
+/* 기본 컬러와 배경 (구현 기준서 참고) */
+#header {
+    background-color: $bg-primary;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    @extend .optima-16;
+    color: $brown-700;
+    transition:
+        background-color 0.4s ease,
+        color 0.4s ease;
+    will-change: transform;
+
+    /* 홈 Hero 구간 - transparent 오버레이 헤더 */
+    &.transparent {
+        background-color: transparent;
+        color: $oatmeal;
+
+        .utl li a,
+        .utl li button,
+        .utl li.search-li,
+        .search-toggle-btn,
+        .search-submit-btn {
+            color: $oatmeal;
+        }
+
+        .search-toggle-btn.search-toggle-btn--open {
+            color: $brown-700;
+        }
+
+        .search-form .search-submit-btn {
+            color: $brown-700;
+        }
+
+        h1 a {
+            color: $oatmeal;
+        }
+
+        .logo-svg {
+            fill: $oatmeal;
+            color: $oatmeal;
+            filter: brightness(0) invert(1);
+        }
+
+        .cart-count {
+            background-color: $point-pink;
+            color: $oatmeal;
+        }
+    }
+}
+
+#header .inner {
+    width: 100%;
+    padding: 0 var(--page-gutter);
+    /* 좌우 여백을 주어 양끝에 붙되 꽉 막히지 않게 조정 */
+    margin: 0 auto;
+    /* 가운대로 정렬 필수 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    box-sizing: border-box;
+    /* 데스크탑 기준 헤더 높이 */
+}
+
+/* GNB 스타일은 src/components/layout/navigation/ 에서 관리 */
+
+/* ==================
+   Logo
+================== */
+#header h1 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+#header h1 a {
+    display: inline-flex;
+    color: $brown-900;
+    /* 이솝 진갈색상 */
+    text-decoration: none;
+    align-items: center;
+}
+
+#header .logo-svg {
+    width: 120px;
+    height: auto;
+    opacity: 1;
+    transition:
+        opacity 0.24s ease,
+        filter 0.4s ease;
+}
+
+#header.transparent:not([data-hero-logo-visible='true']) .logo-svg {
+    opacity: 0;
+}
+
+/* ==================
+   UTL (Utility Menu)
+================== */
+#header .utl {
+    flex: 1;
+    /* 오른쪽 정렬 비율 영역 확보 */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#header .utl li a,
+#header .utl li button,
+#header .utl li.search-li {
+    text-decoration: none;
+    color: $brown-900;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.3s ease;
+}
+
+#header .utl li button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+#header .utl li a:hover,
+#header .utl li button:hover,
+#header .utl li.search-li:hover {
+    opacity: 0.6;
+}
+
+#header .cart-count {
+    /* 사진에 나온 장바구니 카운트 동그란 뱃지 스타일 */
+    background-color: $point-pink;
+    /* 장바구니 숫자의 코랄/살구 계열 느낌 */
+    color: $brown-500;
+    font-size: 11px;
+    font-family: $font-optima;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin-left: -2px;
+    /* 살짝 위로 띄워주기 */
+}
+
+/* ==================
+   Responsive
+================== */
+@media (max-width: 1023px) {
+    #header .inner {
+        height: 68px;
+        padding: 0 clamp(20px, 4vw, 28px);
+    }
+
+    #header .logo-svg {
+        width: 100px;
+    }
+
+    #header .utl {
+        gap: clamp(16px, 2.6vw, 20px);
+    }
+}
+
+@media (max-width: 1023px) {
+    /* 모바일/태블릿: login 버튼 숨김 — 햄버거 메뉴 안으로 이동 */
+    #header .utl .account-li {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    #header .inner {
+        height: 60px;
+        padding: 0 clamp(16px, 3.86vw, 20px);
+    }
+
+    /* 로고: 피그마 93×40px */
+    #header .logo-svg {
+        width: 93px;
+    }
+
+    /* UTL: 아이콘 간 gap 0 (40px 터치영역이 붙음) */
+    #header .utl {
+        gap: 0;
+    }
+
+    /* 검색/카트 아이콘 공통: 40×40 터치영역, 8px 패딩 */
+    #header .utl li.search-li,
+    #header .utl li.cart-li {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 카트 링크: relative로 뱃지 기준점 */
+    #header .cart-link {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 카트 아이콘: 24px */
+    #header .cart-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* 장바구니 뱃지: 16×16px, 우측 상단 오버레이 */
+    #header .cart-count {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        font-family: $font-suit;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    #header .inner {
+        padding: 0 clamp(20px, 2.8vw, 28px);
+    }
+
+    #header .logo-svg {
+        width: 108px;
+    }
+
+    #header .utl {
+        gap: 16px;
+    }
+}

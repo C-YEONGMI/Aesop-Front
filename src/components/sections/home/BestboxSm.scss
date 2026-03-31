@@ -1,0 +1,147 @@
+@use "../../../globals.scss" as *;
+
+.bestboxSm {
+    width: 100%;
+    height: clamp(500px, 35vw, 554px);
+    max-width: 100%;
+    background-color: $bg-product;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: 2px solid rgba($brown-500, 0.85);
+        outline-offset: 3px;
+    }
+
+    .badges {
+        display: flex;
+        gap: 8px;
+        padding: clamp(18px, 1.5vw, 20px) clamp(22px, 2vw, 30px);
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .imgs {
+        width: min(72%, 350px);
+        height: min(72%, 350px);
+        flex: 0 0 min(72%, 350px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        align-self: center;
+        box-sizing: border-box;
+        padding: 0 16px 18px;
+        margin: 10px auto 0;
+        z-index: 1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+    }
+
+    .info {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+        height: 87px;
+        padding: 10px clamp(22px, 3vw, 40px) 12px;
+        color: $brown-700;
+        background: transparent;
+        z-index: 3;
+        transition: bottom 0.25s ease;
+    }
+
+    .product-name {
+        @extend .suit-18-m;
+        color: $brown-700;
+        line-height: 1.35;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .product-price {
+        @extend .suit-26-sb;
+        color: $brown-700;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        line-height: 1.05;
+        transform: translateY(6px);
+        transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.25s ease, margin-top 0.25s ease;
+    }
+
+    .cart-cta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        z-index: 4;
+        transition: height 0.25s ease, opacity 0.2s ease;
+    }
+
+    &:hover {
+        .info {
+            bottom: 50px;
+        }
+
+        .product-price {
+            max-height: 28px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cart-cta {
+            height: 50px;
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        .info {
+            bottom: 50px;
+        }
+
+        .product-price {
+            max-height: 28px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cart-cta {
+            height: 50px;
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 767px) {
+        height: clamp(460px, 118vw, 554px);
+
+        .imgs {
+            width: min(72%, 300px);
+            height: min(72%, 300px);
+            flex-basis: min(72%, 300px);
+        }
+
+        .info {
+            padding-inline: 22px;
+        }
+    }
+}

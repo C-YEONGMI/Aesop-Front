@@ -1,0 +1,131 @@
+@use "../../../globals.scss" as *;
+
+/* ────────────────────────────────────────────────
+   Best Products 섹션 - 고정 큐레이션 3개 카드
+──────────────────────────────────────────────── */
+.best-products {
+    background-color: $bg-primary;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(54px, 5vw, 72px) 0 clamp(88px, 8vw, 154px);
+    box-sizing: border-box;
+
+    /* 섹션 헤더 */
+    &__header {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: min(var(--content-max), calc(100% - (var(--page-gutter) * 2)));
+        min-height: 51px;
+        margin: 0 auto 54px;
+
+        /* More 버튼을 우측 끝에 배치 */
+        .btn-more {
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    &__title {
+        color: $brown-800;
+        letter-spacing: 0.1em;
+        text-align: center;
+    }
+
+    &__more {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        color: $brown-600;
+        @extend .optima-16;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        svg {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover svg {
+            transform: translateX(4px);
+        }
+    }
+
+    &__empty {
+        color: $brown-400;
+        padding: 40px;
+        text-align: center;
+    }
+
+    /* 카드 갤러리: 소형 - 대형 - 소형 */
+    &__gallery {
+        display: flex;
+        gap: clamp(16px, 1vw, 20px);
+        align-items: center;
+        width: min(var(--content-max), calc(100% - (var(--page-gutter) * 2)));
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+/* 카드 크기 제어 */
+.best__card {
+
+    /* sm: 486px 기준 */
+    &--sm {
+        flex: 486 1 0;
+    }
+
+    /* lg: 570px 기준 */
+    &--lg {
+        flex: 570 1 0;
+    }
+}
+
+/* ──────────── 반응형 ──────────── */
+@media (max-width: 1023px) {
+    .best-products {
+        padding: clamp(48px, 7vw, 60px) 0 96px;
+
+        &__header {
+            max-width: 100%;
+            min-height: auto;
+            margin-bottom: 32px;
+            flex-direction: column;
+            gap: 18px;
+
+            .btn-more {
+                position: static;
+            }
+        }
+
+        &__gallery {
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+
+    .best__card {
+
+        &--sm,
+        &--lg {
+            flex: none;
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .best-products {
+        padding: 48px 0 72px;
+
+        &__gallery {
+            gap: 16px;
+        }
+    }
+}

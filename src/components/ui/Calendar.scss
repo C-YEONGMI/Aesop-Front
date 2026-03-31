@@ -1,0 +1,250 @@
+@use '../../globals.scss' as *;
+
+.aesop-calendar {
+    width: min(320px, 100%);
+    padding: 14px;
+    border: 1px solid rgba($brown-200, 0.86);
+    border-radius: 4px;
+    background:
+        linear-gradient(180deg, rgba($oatmeal, 0.98) 0%, rgba($bg-primary, 0.88) 100%);
+    box-shadow:
+        0 18px 50px rgba($brown-900, 0.08),
+        inset 0 1px 0 rgba($oatmeal, 0.9);
+    color: $brown-800;
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 6px;
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+    tbody td {
+        padding: 0;
+    }
+
+    &__months {
+        display: block;
+    }
+
+    &__month-caption {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        margin-bottom: 10px;
+    }
+
+    &__caption-label {
+        color: $brown-700;
+        letter-spacing: -0.01em;
+    }
+
+    &__nav {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+    }
+
+    &__nav-button {
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid rgba($brown-200, 0.9);
+        border-radius: 4px;
+        background: rgba($oatmeal, 0.85);
+        color: rgba($brown-600, 0.95);
+        transition:
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease;
+
+        &:hover {
+            border-color: rgba($brown-400, 0.9);
+            background: rgba($oatmeal, 0.98);
+            color: $brown-800;
+            transform: translateY(-1px);
+        }
+
+        &:disabled,
+        &[aria-disabled='true'] {
+            opacity: 0.42;
+            cursor: default;
+            transform: none;
+        }
+    }
+
+    &__chevron {
+        flex-shrink: 0;
+    }
+
+    &__dropdowns {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__select-trigger {
+        min-height: 34px;
+        height: 34px;
+        padding: 0 10px;
+        border-radius: 4px;
+        box-shadow: none;
+        background: rgba($oatmeal, 0.94);
+    }
+
+    &__select-content {
+        min-width: 112px;
+    }
+
+    &__select-item {
+        min-height: 36px;
+        font-size: 12px;
+    }
+
+    &__dropdown-root {
+        position: relative;
+
+        .aesop-calendar__chevron {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+    }
+
+    &__dropdown {
+        min-width: 76px;
+        height: 34px;
+        padding: 0 28px 0 12px;
+        border: 1px solid rgba($brown-200, 0.92);
+        border-radius: 4px;
+        background: rgba($oatmeal, 0.94);
+        color: $brown-700;
+        appearance: none;
+        outline: none;
+        color-scheme: light;
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:focus-visible {
+            border-color: rgba($brown-500, 0.86);
+            box-shadow: 0 0 0 3px rgba($brown-200, 0.22);
+        }
+
+        option {
+            background: $oatmeal;
+            color: $brown-800;
+        }
+
+        option:checked,
+        option:hover,
+        option:focus-visible {
+            background: rgba($brown-100, 0.84);
+            color: $brown-900;
+        }
+    }
+
+    &__weekday {
+        padding-bottom: 4px;
+        color: rgba($brown-400, 0.9);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+    }
+
+    &__month-grid {
+        width: 100%;
+    }
+
+    &__day {
+        width: 40px;
+        height: 40px;
+    }
+
+    &__day-button {
+        width: 40px;
+        height: 40px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background: transparent;
+        color: $brown-700;
+        transition:
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            background: rgba($bg-primary, 0.84);
+            border-color: rgba($brown-100, 0.9);
+            color: $brown-800;
+            transform: translateY(-1px);
+        }
+
+        &:focus-visible {
+            border-color: rgba($brown-500, 0.82);
+            box-shadow: 0 0 0 3px rgba($brown-200, 0.22);
+            outline: none;
+        }
+    }
+
+    &__day--selected .aesop-calendar__day-button,
+    &__day-button[aria-selected='true'] {
+        background: $brown-700;
+        border-color: $brown-700;
+        color: $oatmeal;
+        box-shadow: 0 8px 18px rgba($brown-900, 0.14);
+    }
+
+    &__day--today:not(.aesop-calendar__day--selected) .aesop-calendar__day-button,
+    &__day-button[data-today='true']:not([aria-selected='true']) {
+        border-color: rgba($brown-300, 0.88);
+        background: rgba($oatmeal, 0.86);
+    }
+
+    &__day--outside .aesop-calendar__day-button {
+        color: rgba($brown-300, 0.72);
+        background: transparent;
+    }
+
+    &__day--disabled .aesop-calendar__day-button,
+    &__day-button:disabled {
+        color: rgba($brown-300, 0.56);
+        cursor: default;
+        text-decoration: line-through;
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+        transform: none;
+    }
+
+    &__day--hidden {
+        visibility: hidden;
+    }
+
+    @media (max-width: 767px) {
+        width: min(100%, 312px);
+        padding: 12px;
+
+        &__nav-button,
+        &__dropdown,
+        &__day-button {
+            border-radius: 4px;
+        }
+    }
+}

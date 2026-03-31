@@ -1,0 +1,317 @@
+@use "../../../globals.scss" as *;
+
+.official-benefits-intro {
+    --intro-bg-dark: #191610;
+    --intro-bg-light: #f3ede2;
+    --intro-text-dark: #{$oatmeal};
+    --intro-text-light: #{$brown-700};
+    --intro-grid-strong: rgba(255, 255, 255, 0.055);
+    --intro-grid-soft: rgba(255, 255, 255, 0.02);
+
+    position: relative;
+    overflow: hidden;
+
+    &__pin {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+    }
+
+    &__surface {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+        background-color: var(--intro-bg-dark);
+        color: var(--intro-text-dark);
+        isolation: isolate;
+    }
+
+    &__grid,
+    &__light-layer,
+    &__hero-copy,
+    &__secondary-copy,
+    &__product-wrap {
+        position: absolute;
+        inset: 0;
+    }
+
+    &__grid {
+        background:
+            radial-gradient(circle at 50% 68%, rgba(255, 255, 255, 0.12) 0%, transparent 26%),
+            linear-gradient(90deg, var(--intro-grid-strong) 1px, transparent 1px),
+            linear-gradient(0deg, var(--intro-grid-soft) 1px, transparent 1px);
+        background-size: auto, 108px 108px, 108px 108px;
+        opacity: 0.34;
+        mix-blend-mode: screen;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &__light-layer {
+        background:
+            radial-gradient(circle at 50% 44%, rgba(255, 251, 243, 0.52) 0%, transparent 28%),
+            linear-gradient(180deg, #f7f1e7 0%, var(--intro-bg-light) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    &__hero-copy,
+    &__secondary-copy {
+        pointer-events: none;
+    }
+
+    &__hero-copy {
+        z-index: 5;
+    }
+
+    &__secondary-copy {
+        &--top {
+            z-index: 6;
+        }
+
+        &--bottom {
+            z-index: 3;
+        }
+    }
+
+    &__hero-title,
+    &__secondary-line {
+        margin: 0;
+        font-family: $font-montage;
+        font-weight: 400;
+        line-height: 0.94;
+        text-align: center;
+    }
+
+    &__hero-title {
+        position: absolute;
+        left: 50%;
+        top: clamp(132px, 9vh, 176px);
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: min(100%, 12ch);
+        color: var(--intro-text-dark);
+        font-size: clamp(74px, 8.4vw, 168px);
+        letter-spacing: -0.05em;
+
+        span {
+            white-space: nowrap;
+        }
+    }
+
+    &__secondary-line {
+        position: absolute;
+        left: 50%;
+        width: max-content;
+        max-width: none;
+        transform: translateX(-50%);
+        color: var(--intro-text-light);
+        font-size: clamp(64px, 6.1vw, 128px);
+        letter-spacing: -0.048em;
+        white-space: nowrap;
+
+        &--top {
+            top: clamp(214px, 25vh, 276px);
+        }
+
+        &--bottom {
+            top: clamp(306px, 35vh, 372px);
+        }
+    }
+
+    &__product-wrap {
+        z-index: 4;
+        left: 50%;
+        top: auto;
+        bottom: clamp(-132px, -8vh, -72px);
+        width: min(38vw, 600px);
+        height: min(84vh, 980px);
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    &__product-glow {
+        position: absolute;
+        inset: 24% 16% 18%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 248, 236, 0.7) 0%, rgba(255, 248, 236, 0) 70%);
+        filter: blur(20px);
+    }
+
+    &__product-image {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center bottom;
+        will-change: transform, filter, opacity;
+    }
+}
+
+@media (max-width: 1439px) {
+    .official-benefits-intro {
+        &__hero-title,
+        &__secondary-line {
+            font-size: clamp(52px, 5.2vw, 104px);
+        }
+
+        &__product-wrap {
+            width: min(42vw, 540px);
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .official-benefits-intro {
+        &__pin,
+        &__surface {
+            min-height: clamp(760px, 110vw, 980px);
+        }
+
+        &__hero-title {
+            top: 88px;
+            width: min(calc(100% - (var(--page-gutter) * 2)), 12ch);
+            font-size: clamp(40px, 8.2vw, 72px);
+            letter-spacing: -0.04em;
+
+            span {
+                white-space: normal;
+            }
+        }
+
+        &__secondary-line {
+            width: min(calc(100% - (var(--page-gutter) * 2)), 12ch);
+            max-width: 100%;
+            font-size: clamp(36px, 5.2vw, 64px);
+            letter-spacing: -0.04em;
+            line-height: 0.98;
+            white-space: normal;
+
+            &--top {
+                top: clamp(176px, 28vh, 228px);
+            }
+
+            &--bottom {
+                top: clamp(246px, 38vh, 304px);
+            }
+        }
+
+        &__product-wrap {
+            bottom: -44px;
+            width: min(64vw, 400px);
+            height: min(58vh, 520px);
+        }
+
+        &__grid {
+            background-size: auto, 72px 72px, 72px 72px;
+            opacity: 0.22;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .official-benefits-intro {
+        &__pin,
+        &__surface {
+            min-height: clamp(620px, 170vw, 820px);
+        }
+
+        &__hero-title {
+            top: 72px;
+            width: min(calc(100% - (clamp(16px, 4.83vw, 20px) * 2)), 10ch);
+            font-size: clamp(34px, 10vw, 52px);
+        }
+
+        &__secondary-line {
+            width: min(calc(100% - (clamp(16px, 4.83vw, 20px) * 2)), 11ch);
+            max-width: 100%;
+            font-size: clamp(22px, 6vw, 32px);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            white-space: normal;
+
+            &--top {
+                top: clamp(150px, 24vh, 186px);
+            }
+
+            &--bottom {
+                top: clamp(206px, 33vh, 252px);
+            }
+        }
+
+        &__product-wrap {
+            bottom: -24px;
+            width: min(72vw, 320px);
+            height: min(46vh, 380px);
+        }
+    }
+}
+
+@media (max-width: 359px) {
+    .official-benefits-intro {
+        &__pin,
+        &__surface {
+            min-height: 620px;
+        }
+
+        &__hero-title {
+            top: 68px;
+            font-size: 32px;
+        }
+
+        &__secondary-line {
+            font-size: 20px;
+
+            &--top {
+                top: 146px;
+            }
+
+            &--bottom {
+                top: 198px;
+            }
+        }
+
+        &__product-wrap {
+            width: min(78vw, 280px);
+            height: min(42vh, 320px);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .official-benefits-intro {
+        &__pin,
+        &__surface {
+            min-height: auto;
+        }
+
+        &__surface {
+            min-height: 100svh;
+            background: linear-gradient(180deg, var(--intro-bg-dark) 0%, var(--intro-bg-light) 100%);
+        }
+
+        &__grid {
+            opacity: 0.12;
+        }
+
+        &__light-layer {
+            clip-path: none;
+            opacity: 0.82;
+        }
+
+        &__hero-title {
+            opacity: 0;
+        }
+
+        &__secondary-line {
+            opacity: 1;
+            filter: none;
+        }
+    }
+}

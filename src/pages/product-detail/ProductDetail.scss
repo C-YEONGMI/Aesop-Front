@@ -1,0 +1,320 @@
+@use '../../globals.scss' as *;
+
+.product-detail {
+    background-color: $bg-primary;
+    min-height: 100vh;
+
+    &__header-space {
+        height: 70px;
+    }
+
+    &__not-found {
+        padding: 120px 4%;
+        color: $brown-500;
+        text-align: center;
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: $brown-700;
+            text-decoration: none;
+            border-bottom: 1px solid $brown-300;
+        }
+    }
+
+    &__inner {
+        width: min(1200px, calc(100% - (var(--page-gutter) * 2)));
+        margin: 0 auto;
+        padding: 40px 0 100px;
+    }
+
+    &__breadcrumb {
+        color: $brown-400;
+        margin-bottom: 40px;
+
+        a {
+            color: $brown-400;
+            text-decoration: none;
+
+            &:hover {
+                color: $brown-700;
+            }
+        }
+    }
+
+    &__main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(48px, 5vw, 80px);
+        margin-bottom: 80px;
+    }
+
+    &__img-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(24px, 4vw, 40px);
+        background-color: $bg-product;
+        aspect-ratio: 1 / 1;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__info {
+        position: sticky;
+        top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: fit-content;
+    }
+
+    &__badges {
+        display: flex;
+        gap: 6px;
+    }
+    &__category {
+        color: $brown-400;
+    }
+
+    &__name {
+        margin: 0;
+        color: $brown-900;
+        line-height: 1.2;
+    }
+
+    &__desc {
+        color: $brown-500;
+        line-height: 1.8;
+    }
+
+    &__price {
+        margin: 8px 0;
+        color: $brown-800;
+    }
+
+    &__variants {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__variant-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    &__variant-btn {
+        padding: 10px 16px;
+        border: 1px solid $brown-200;
+        background: none;
+        color: $brown-600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.active,
+        &:hover {
+            border-color: $brown-800;
+            background-color: $brown-800;
+            color: $oatmeal;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    &__add-btn {
+        flex: 1;
+        padding: 16px;
+        border: 1px solid $brown-700;
+        background: none;
+        color: $brown-700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $brown-700;
+            color: $oatmeal;
+        }
+
+        &:disabled {
+            border-color: $brown-300;
+            color: $brown-300;
+            cursor: not-allowed;
+
+            &:hover {
+                background: none;
+            }
+        }
+    }
+
+    &__buy-btn {
+        flex: 1;
+        padding: 16px;
+        border: 1px solid $brown-800;
+        background-color: $brown-800;
+        color: $oatmeal;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:disabled {
+            border-color: $brown-300;
+            background-color: $brown-300;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: $brown-300;
+            }
+        }
+
+        &:hover {
+            background-color: $brown-900;
+        }
+    }
+
+    &__wish-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        border: 1px solid $brown-200;
+        background: none;
+        color: $point-pink;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        &.active {
+            color: $point-pink;
+        }
+        &:hover {
+            color: $point-pink;
+        }
+    }
+
+    &__benefits {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-top: 16px;
+        border-top: 1px solid $brown-100;
+        color: $brown-400;
+    }
+
+    &__tabs {
+        border-top: 1px solid $brown-200;
+    }
+
+    &__tab-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: hidden;
+        border-bottom: 1px solid rgba(118, 97, 68, 0.1);
+        background: rgba(255, 251, 243, 0.94);
+        backdrop-filter: blur(12px);
+    }
+
+    &__tab-btn {
+        min-width: 0;
+        padding: 18px 12px;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: none;
+        color: $brown-300;
+        font-family: $font-suit;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+
+        &.is-active {
+            color: $brown-700;
+            border-bottom-color: $brown-700;
+        }
+    }
+
+    &__tab-content {
+        padding: 42px 0 0;
+        color: $brown-500;
+        line-height: 1.9;
+    }
+
+    &__tab-detail {
+        display: grid;
+        gap: 28px;
+    }
+
+    &__detail-block {
+        padding-bottom: 28px;
+        border-bottom: 1px solid $brown-100;
+    }
+
+    &__detail-title {
+        margin-bottom: 10px;
+        color: $brown-800;
+    }
+
+    &__qna-empty {
+        display: grid;
+        gap: 10px;
+    }
+
+    &__no-review {
+        color: $brown-300;
+    }
+}
+
+@media (max-width: 1023px) {
+    .product-detail {
+        &__main {
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        &__info {
+            position: static;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .product-detail {
+        &__inner {
+            width: min(100%, calc(100% - (clamp(16px, 4.83vw, 20px) * 2)));
+            padding: 32px 0 88px;
+        }
+
+        &__main {
+            gap: 40px;
+        }
+
+        &__actions {
+            flex-wrap: wrap;
+        }
+
+        &__wish-btn {
+            width: 100%;
+            min-height: 52px;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .product-detail {
+        &__inner {
+            width: min(100%, calc(100% - 32px));
+        }
+
+        &__tab-btn {
+            padding: 14px 8px;
+            font-size: 13px;
+        }
+    }
+}
