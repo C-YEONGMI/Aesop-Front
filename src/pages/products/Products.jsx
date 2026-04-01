@@ -33,6 +33,7 @@ import useRequireLoginAction from '../../hooks/useRequireLoginAction';
 import { getProductDetailPath } from '../../lib/products/productShape';
 import {
     PRODUCT_CATEGORY_CONFIG,
+    getCategoryApiValueFromSlug,
     getCategoryLabelFromValue,
     getCategorySlugFromValue,
 } from '../../data/productCategories';
@@ -198,6 +199,9 @@ const Products = () => {
     const q = searchParams.get('q')?.trim() || '';
     const categoryConfig = category ? PRODUCT_CATEGORY_CONFIG[category] : null;
     const routeCategorySlug = categoryConfig?.slug || '';
+    const apiCategorySlug = routeCategorySlug
+        ? getCategoryApiValueFromSlug(routeCategorySlug)
+        : '';
     const navigationProducts = referenceProducts.length > 0 ? referenceProducts : products;
     const catalogRequestKey = `${routeCategorySlug}|${q}|${sort}|${limit}`;
 
@@ -253,7 +257,7 @@ const Products = () => {
                     fetchProductCatalog({
                         page: 1,
                         limit,
-                        category: routeCategorySlug,
+                        category: apiCategorySlug,
                         q,
                         sort,
                     })
@@ -264,7 +268,7 @@ const Products = () => {
                         fetchProductCatalog({
                             page: nextPage,
                             limit,
-                            category: routeCategorySlug,
+                            category: apiCategorySlug,
                             q,
                             sort,
                             append: true,
@@ -282,7 +286,7 @@ const Products = () => {
         return () => {
             isActive = false;
         };
-    }, [dispatch, initialRequestedPage, limit, q, routeCategorySlug, sort]);
+    }, [apiCategorySlug, dispatch, initialRequestedPage, limit, q, routeCategorySlug, sort]);
 
     useEffect(() => {
         if (skipRouteCategorySyncRef.current) {
@@ -540,7 +544,7 @@ const Products = () => {
                 fetchProductCatalog({
                     page: nextPage,
                     limit,
-                    category: routeCategorySlug,
+                    category: apiCategorySlug,
                     q,
                     sort,
                     append: true,
@@ -559,6 +563,7 @@ const Products = () => {
         productPagination.page,
         productStatus,
         q,
+        apiCategorySlug,
         routeCategorySlug,
         sort,
     ]);
@@ -574,7 +579,7 @@ const Products = () => {
             fetchProductCatalog({
                 page: nextPage,
                 limit,
-                category: routeCategorySlug,
+                category: apiCategorySlug,
                 q,
                 sort,
                 append: true,
@@ -674,7 +679,7 @@ const Products = () => {
             fetchProductCatalog({
                 page: 1,
                 limit,
-                category: routeCategorySlug,
+                category: apiCategorySlug,
                 q,
                 sort,
             })

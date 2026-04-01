@@ -58,21 +58,21 @@ export const menuData = [
                 ],
             },
             {
-                label: 'HOME & LIVING',
+                label: 'HOME · LIVING',
                 path: '/products/home',
                 children: [
                     { label: 'Room sprays', path: '/products/home/room-sprays', classification: { category: 'Home & living', subcategory: 'Room sprays' } },
-                    { label: 'Incense & holders', path: '/products/home/incense-holders', classification: { category: 'Home & living', subcategory: 'Incense & holders' } },
-                    { label: 'Oils & burners', path: '/products/home/oils-burners', classification: { category: 'Home & living', subcategory: 'Oils & burners' } },
+                    { label: 'Incense · holders', path: '/products/home/incense-holders', classification: { category: 'Home & living', subcategory: 'Incense & holders' } },
+                    { label: 'Oils · burners', path: '/products/home/oils-burners', classification: { category: 'Home & living', subcategory: 'Oils & burners' } },
                     { label: 'Candles', path: '/products/home/candles', classification: { category: 'Home & living', subcategory: 'Candles' } },
                     { label: 'Bathroom', path: '/products/home/bathroom', classification: { category: 'Home & living', subcategory: 'Bathroom' } },
                 ],
             },
             {
-                label: 'HAIR & SHAVING',
+                label: 'HAIR · SHAVING',
                 path: '/products/hair',
                 children: [
-                    { label: 'Shampoos & conditioners', path: '/products/hair/shampoos-conditioners', classification: { category: 'Hair & shaving', subcategory: 'Shampoos & conditioners' } },
+                    { label: 'Shampoos · conditioners', path: '/products/hair/shampoos-conditioners', classification: { category: 'Hair & shaving', subcategory: 'Shampoos & conditioners' } },
                     { label: 'Hair treatments', path: '/products/hair/hair-treatments', classification: { category: 'Hair & shaving', subcategory: 'Hair treatments' } },
                     { label: 'Hair styling', path: '/products/hair/hair-styling', classification: { category: 'Hair & shaving', subcategory: 'Hair styling' } },
                     { label: 'Shaving', path: '/products/hair/shaving', classification: { category: 'Hair & shaving', subcategory: 'Shaving' } },

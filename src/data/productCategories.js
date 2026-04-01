@@ -1,31 +1,37 @@
 export const PRODUCT_CATEGORY_GROUPS = [
     {
         slug: 'skincare',
+        apiValue: 'skin-care',
         label: 'SKIN CARE',
         aliases: ['Skin Care', 'SKIN CARE'],
     },
     {
         slug: 'fragrance',
+        apiValue: 'fragrance',
         label: 'PERFUME',
         aliases: ['Fragrance', 'Perfume', 'PERFUME'],
     },
     {
         slug: 'home',
+        apiValue: 'home-living',
         label: 'HOME · LIVING',
         aliases: ['Home', 'Home · Living', 'HOME · LIVING'],
     },
     {
         slug: 'hair',
+        apiValue: 'hair-shaving',
         label: 'HAIR · SHAVING',
         aliases: ['Hair', 'Hair · Shaving', 'HAIR · SHAVING'],
     },
     {
         slug: 'body',
+        apiValue: 'hand-body',
         label: 'HAND · BODY',
         aliases: ['Body', 'Body · Hand', 'Hand · Body', 'HAND · BODY'],
     },
     {
         slug: 'kits',
+        apiValue: 'kits',
         label: 'KITS',
         aliases: ['Gifts', 'Travel', 'Kits', 'KITS'],
     },
@@ -68,6 +74,9 @@ export const getCategoryRouteFromValue = (value = '') => {
     const slug = getCategorySlugFromValue(value);
     return slug ? `/products/${slug}` : '/products';
 };
+
+export const getCategoryApiValueFromSlug = (slug = '') =>
+    PRODUCT_CATEGORY_CONFIG[slug]?.apiValue || slug;
 
 export const extractProductCodeFromImage = (imageUrl = '') => {
     const matches =
