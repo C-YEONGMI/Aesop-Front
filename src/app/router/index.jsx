@@ -13,14 +13,54 @@ import Search from '../../pages/search/Search';
 import RequireAuth from './guards/RequireAuth';
 import PublicOnlyRoute from './guards/PublicOnlyRoute';
 
-const Main = lazy(() => import('../../pages/main/Main'));
-const Products = lazy(() => import('../../pages/products/Products'));
-const ProductDetail = lazy(() => import('../../pages/product-detail/ProductDetail'));
-const Cart = lazy(() => import('../../pages/cart/Cart'));
-const Checkout = lazy(() => import('../../pages/checkout/Checkout'));
-const MyPage = lazy(() => import('../../pages/my-page/MyPage'));
-const Support = lazy(() => import('../../pages/support/Support'));
-const StoreLocator = lazy(() => import('../../pages/store-locator/StoreLocator'));
+const isDynamicImportError = (error) => {
+    const message = String(error?.message || '');
+
+    return /Failed to fetch dynamically imported module|Importing a module script failed|ChunkLoadError/i.test(
+        message
+    );
+};
+
+const lazyWithRetry = (cacheKey, importer) =>
+    lazy(async () => {
+        const reloadKey = `lazy-retry:${cacheKey}`;
+
+        try {
+            const module = await importer();
+
+            if (typeof window !== 'undefined') {
+                window.sessionStorage.removeItem(reloadKey);
+            }
+
+            return module;
+        } catch (error) {
+            if (
+                typeof window !== 'undefined' &&
+                isDynamicImportError(error) &&
+                window.sessionStorage.getItem(reloadKey) !== 'true'
+            ) {
+                window.sessionStorage.setItem(reloadKey, 'true');
+                window.location.reload();
+
+                return new Promise(() => {});
+            }
+
+            if (typeof window !== 'undefined') {
+                window.sessionStorage.removeItem(reloadKey);
+            }
+
+            throw error;
+        }
+    });
+
+const Main = lazyWithRetry('main', () => import('../../pages/main/Main'));
+const Products = lazyWithRetry('products', () => import('../../pages/products/Products'));
+const ProductDetail = lazyWithRetry('product-detail', () => import('../../pages/product-detail/ProductDetail'));
+const Cart = lazyWithRetry('cart', () => import('../../pages/cart/Cart'));
+const Checkout = lazyWithRetry('checkout', () => import('../../pages/checkout/Checkout'));
+const MyPage = lazyWithRetry('mypage', () => import('../../pages/my-page/MyPage'));
+const Support = lazyWithRetry('support', () => import('../../pages/support/Support'));
+const StoreLocator = lazyWithRetry('store-locator', () => import('../../pages/store-locator/StoreLocator'));
 
 const RouteFallback = () => (
     <div className="route-loading" role="status" aria-live="polite">
