@@ -170,6 +170,17 @@
         gap: 6px;
     }
 
+    &__profile-value,
+    &__info-value,
+    &__info-item > span:last-child {
+        min-width: 0;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     &__profile-top,
     &__panel-head,
     &__latest-footer,

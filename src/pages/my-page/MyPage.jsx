@@ -309,7 +309,9 @@ const MyPage = () => {
                                 {profileSummaryItems.map((item) => (
                                     <div key={item.label} className="mypage__profile-meta">
                                         <span className="mypage__profile-label suit-12-r">{item.label}</span>
-                                        <span>{item.value}</span>
+                                        <span className="mypage__profile-value" title={item.value}>
+                                            {item.value}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -583,15 +585,21 @@ const MyPage = () => {
                                             <div className="mypage__info-list suit-16-r">
                                                 <div className="mypage__info-item">
                                                     <span className="mypage__info-label suit-14-m">이름</span>
-                                                    <span>{user.name}</span>
+                                                    <span className="mypage__info-value" title={user.name}>
+                                                        {user.name}
+                                                    </span>
                                                 </div>
                                                 <div className="mypage__info-item">
                                                     <span className="mypage__info-label suit-14-m">아이디</span>
-                                                    <span>{user.userId || '-'}</span>
+                                                    <span className="mypage__info-value" title={user.userId || '-'}>
+                                                        {user.userId || '-'}
+                                                    </span>
                                                 </div>
                                                 <div className="mypage__info-item">
                                                     <span className="mypage__info-label suit-14-m">이메일</span>
-                                                    <span>{user.email}</span>
+                                                    <span className="mypage__info-value" title={user.email}>
+                                                        {user.email}
+                                                    </span>
                                                 </div>
                                                 <div className="mypage__info-item">
                                                     <span className="mypage__info-label suit-14-m">연락처</span>
@@ -599,7 +607,9 @@ const MyPage = () => {
                                                 </div>
                                                 <div className="mypage__info-item">
                                                     <span className="mypage__info-label suit-14-m">가입일</span>
-                                                    <span>{formatDate(user.createdAt)}</span>
+                                                    <span className="mypage__info-value" title={formatDate(user.createdAt)}>
+                                                        {formatDate(user.createdAt)}
+                                                    </span>
                                                 </div>
                                                 <div className="mypage__info-item">
                                                     <span className="mypage__info-label suit-14-m">배송지</span>
