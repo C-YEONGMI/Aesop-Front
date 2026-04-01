@@ -287,6 +287,9 @@ const buildAuthorizeUrl = (provider) => {
         url.searchParams.set('redirect_uri', redirectUri);
         url.searchParams.set('response_type', 'code');
         url.searchParams.set('state', state);
+        // Force the Kakao account login screen so a previously signed-in browser
+        // session does not silently continue with the same account.
+        url.searchParams.set('prompt', 'login');
         return url.toString();
     }
 
