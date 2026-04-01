@@ -4,6 +4,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Draggable } from 'gsap/Draggable';
 import MoreBox from '../../common/button/MoreBox';
 import GNB_Logo from '../../../assets/GNB_Logo.svg?react';
+import Exclusive1 from '../../../assets/Exclusive_1.png';
+import Exclusive2 from '../../../assets/Exclusive_2.png';
+import Exclusive3 from '../../../assets/Exclusive_3.png';
+import Exclusive4 from '../../../assets/Exclusive_4.png';
+import Exclusive5 from '../../../assets/Exclusive_5.png';
+import Exclusive6 from '../../../assets/Exclusive_6.png';
 import './OfficialExclusiveSection.scss';
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
@@ -28,14 +34,8 @@ const DECOR_FRAMES = [
             {
                 key: 'primary',
                 nodeId: '762:2528',
-                src: 'https://www.figma.com/api/mcp/asset/c609f8ee-4774-49e3-9787-76e26d6788ef',
-                style: { top: '0', left: '-175px', width: '422px', height: '264px' },
-            },
-            {
-                key: 'secondary',
-                nodeId: '762:2529',
-                src: 'https://www.figma.com/api/mcp/asset/5307c08b-5d40-4c9f-9240-b04ce93ae9bc',
-                style: { top: '0', left: '-51px', width: '264px', height: '264px' },
+                src: Exclusive1,
+                style: { top: '0', left: '0', width: '100%', height: '100%' },
             },
         ],
     },
@@ -47,8 +47,8 @@ const DECOR_FRAMES = [
             {
                 key: 'secondary',
                 nodeId: '762:2526',
-                src: 'https://www.figma.com/api/mcp/asset/159702ee-7fbb-411a-89cf-7c276709935b',
-                style: { top: '-108px', left: '-33px', width: '157px', height: '279px' },
+                src: Exclusive2,
+                style: { top: '0', left: '0', width: '100%', height: '100%' },
             },
         ],
     },
@@ -60,14 +60,8 @@ const DECOR_FRAMES = [
             {
                 key: 'primary',
                 nodeId: '762:2522',
-                src: 'https://www.figma.com/api/mcp/asset/6131e203-06b3-41d2-b659-266a67ccf840',
-                style: { top: '0', left: '-64px', width: '259px', height: '259px' },
-            },
-            {
-                key: 'secondary',
-                nodeId: '762:2523',
-                src: 'https://www.figma.com/api/mcp/asset/74889688-0077-457d-89dc-03ea9fe1097c',
-                style: { top: '-5px', left: '-50px', width: '245px', height: '245px' },
+                src: Exclusive3,
+                style: { top: '0', left: '0', width: '100%', height: '100%' },
             },
         ],
     },
@@ -79,14 +73,8 @@ const DECOR_FRAMES = [
             {
                 key: 'primary',
                 nodeId: '762:2519',
-                src: 'https://www.figma.com/api/mcp/asset/740dc5bf-7bb7-4f7c-ad62-bc74f46b770a',
-                style: { top: '-10px', left: '-25px', width: '175px', height: '175px' },
-            },
-            {
-                key: 'secondary',
-                nodeId: '762:2520',
-                src: 'https://www.figma.com/api/mcp/asset/8a61c17d-db81-42ce-a7c3-8fd23979b3b2',
-                style: { top: '-12px', left: '-20px', width: '170px', height: '170px' },
+                src: Exclusive4,
+                style: { top: '0', left: '0', width: '100%', height: '100%' },
             },
         ],
     },
@@ -98,14 +86,8 @@ const DECOR_FRAMES = [
             {
                 key: 'primary',
                 nodeId: '762:2513',
-                src: 'https://www.figma.com/api/mcp/asset/1709bb5f-a3eb-4f34-8af2-0cf39466d769',
-                style: { top: '0', left: '-63px', width: '336px', height: '336px' },
-            },
-            {
-                key: 'secondary',
-                nodeId: '762:2514',
-                src: 'https://www.figma.com/api/mcp/asset/0fb3be4b-9eab-4f8d-9f67-c7cf3a768273',
-                style: { top: '0', left: '-215px', width: '546px', height: '341px' },
+                src: Exclusive5,
+                style: { top: '0', left: '0', width: '100%', height: '100%' },
             },
         ],
     },
@@ -117,14 +99,8 @@ const DECOR_FRAMES = [
             {
                 key: 'primary',
                 nodeId: '762:2516',
-                src: 'https://www.figma.com/api/mcp/asset/3b76fb12-c98b-4955-9028-35c9689d6c89',
-                style: { top: '0', left: '-180px', width: '333px', height: '155px' },
-            },
-            {
-                key: 'secondary',
-                nodeId: '762:2517',
-                src: 'https://www.figma.com/api/mcp/asset/582e4a01-30c7-4295-bacb-6a27ad682467',
-                style: { top: '0', left: '-13px', width: '193px', height: '193px' },
+                src: Exclusive6,
+                style: { top: '0', left: '0', width: '100%', height: '100%' },
             },
         ],
     },
@@ -388,7 +364,7 @@ const OfficialExclusiveSection = () => {
                 };
 
                 const updateImageDrift = (offsetY, velocityY = 0) => {
-                    const dragY = clampY(offsetY);
+                    const dragY = gsap.utils.clamp(-MAX_DRIFT_Y, MAX_DRIFT_Y, offsetY);
                     const directionalSpeed = Math.min(Math.abs(velocityY), 56);
 
                     controllers.forEach(({ depth, yTo }) => {
@@ -420,10 +396,7 @@ const OfficialExclusiveSection = () => {
                         section.classList.add('is-dragging');
                     },
                     onDrag() {
-                        updateImageDrift(
-                            this.y * 1.55,
-                            this.deltaY
-                        );
+                        updateImageDrift(this.y * 1.55, this.deltaY);
                     },
                     onRelease() {
                         section.classList.remove('is-dragging');
@@ -446,23 +419,23 @@ const OfficialExclusiveSection = () => {
                 };
             });
 
-            mm.add('(min-width: 768px) and (max-width: 1023px)', () => {
-                return createResponsiveFloatAnimation({
+            mm.add('(min-width: 768px) and (max-width: 1023px)', () =>
+                createResponsiveFloatAnimation({
                     start: 'top 76%',
                     contentY: 26,
                     imageY: 84,
                     floatFactor: 0.72,
-                });
-            });
+                })
+            );
 
-            mm.add('(min-width: 1024px) and (max-width: 1439px)', () => {
-                return createResponsiveFloatAnimation({
+            mm.add('(min-width: 1024px) and (max-width: 1439px)', () =>
+                createResponsiveFloatAnimation({
                     start: 'top 74%',
                     contentY: 28,
                     imageY: 96,
                     floatFactor: 0.82,
-                });
-            });
+                })
+            );
 
             mm.add('(max-width: 767px)', () => {
                 animateContentOnly();
@@ -556,16 +529,8 @@ const OfficialExclusiveSection = () => {
 
                 <div className="official-exclusive__gallery" aria-hidden="true">
                     {RESPONSIVE_GALLERY_IMAGES.map((image) => (
-                        <div
-                            key={`responsive-${image.key}`}
-                            className="official-exclusive__gallery-card"
-                        >
-                            <img
-                                className="official-exclusive__gallery-image"
-                                src={image.src}
-                                alt=""
-                                draggable={false}
-                            />
+                        <div key={`responsive-${image.key}`} className="official-exclusive__gallery-card">
+                            <img className="official-exclusive__gallery-image" src={image.src} alt="" draggable={false} />
                         </div>
                     ))}
                 </div>

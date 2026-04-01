@@ -14,7 +14,7 @@
 
     &__bg-logo {
         position: absolute;
-        top: 276px;
+        top: 316px;
         left: 50%;
         width: 574px;
         height: 186px;
@@ -165,7 +165,7 @@
         min-height: clamp(820px, 78vw, 980px);
 
         &__bg-logo {
-            top: clamp(176px, 16vw, 230px);
+            top: clamp(208px, 18vw, 262px);
             left: 50%;
             right: auto;
             width: min(34vw, 420px);
@@ -249,7 +249,7 @@
         min-height: clamp(760px, 114vw, 980px);
 
         &__bg-logo {
-            top: clamp(176px, 23vw, 238px);
+            top: clamp(196px, 26vw, 258px);
             left: 50%;
             right: auto;
             width: min(48vw, 360px);
