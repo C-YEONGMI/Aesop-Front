@@ -518,6 +518,11 @@ const Products = () => {
         Boolean(classificationMatch) ||
         activeGiftFilters.length > 0 ||
         activePriceRanges.length > 0;
+    const isAllProductsView = !classificationMatch && activeCategoryLabels.length !== 1;
+    const displayPageTitle = isAllProductsView ? 'Products' : pageTitle;
+    const displayBreadcrumbLabel = isAllProductsView
+        ? 'All Products'
+        : formatBreadcrumbLabel(breadcrumbLabel);
 
     const loadNextPage = useCallback(async () => {
         if (!hasNextPage || isAppending || productStatus === 'loading' || productAppendError) {
@@ -758,13 +763,13 @@ const Products = () => {
                                         )}
                                     </Link>
                                     <span> / </span>
-                                    <span>{formatBreadcrumbLabel(breadcrumbLabel)}</span>
+                                    <span>{displayBreadcrumbLabel}</span>
                                 </>
                             ) : (
-                                <span>{formatBreadcrumbLabel(breadcrumbLabel)}</span>
+                                <span>{displayBreadcrumbLabel}</span>
                             )}
                         </nav>
-                        <h1 className="montage-80">{pageTitle}</h1>
+                        <h1 className="montage-80">{displayPageTitle}</h1>
                     </div>
 
                     <div className="products-page__body">

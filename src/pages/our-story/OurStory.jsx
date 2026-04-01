@@ -466,7 +466,11 @@ const OurStory = () => {
                 });
 
                 gsap.to(valuesHeadingRef.current, {
-                    y: () => 70 + valuesHeadingRef.current.offsetHeight * 0.3 - window.innerHeight / 2,
+                    y: () => {
+                        const headingHeight = valuesHeadingRef.current?.offsetHeight ?? 0;
+
+                        return 70 + headingHeight * 0.3 - window.innerHeight / 2;
+                    },
                     yPercent: 0, scale: 0.6, ease: 'none',
                     scrollTrigger: {
                         trigger: storyMidRef.current,

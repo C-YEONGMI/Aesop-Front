@@ -17,7 +17,33 @@ const normalizeApiBaseUrl = (value = '') => {
     return `${trimmedValue}/api`;
 };
 
-const getApiBaseUrl = () => normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL || '');
+const shouldUseSameOriginApiProxy = (configuredBaseUrl = '') => {
+    if (!configuredBaseUrl || typeof window === 'undefined') {
+        return false;
+    }
+
+    try {
+        const configuredUrl = new URL(configuredBaseUrl);
+
+        if (configuredUrl.origin === window.location.origin) {
+            return false;
+        }
+
+        return window.location.protocol === 'https:' && configuredUrl.protocol === 'http:';
+    } catch {
+        return false;
+    }
+};
+
+const getApiBaseUrl = () => {
+    const configuredBaseUrl = trimTrailingSlash(import.meta.env.VITE_API_BASE_URL || '');
+
+    if (shouldUseSameOriginApiProxy(configuredBaseUrl)) {
+        return '/api';
+    }
+
+    return normalizeApiBaseUrl(configuredBaseUrl);
+};
 
 const toRequestUrl = (path) => {
     if (/^https?:\/\//i.test(path)) {
