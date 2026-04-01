@@ -38,6 +38,10 @@ const shouldUseSameOriginApiProxy = (configuredBaseUrl = '') => {
 const getApiBaseUrl = () => {
     const configuredBaseUrl = trimTrailingSlash(import.meta.env.VITE_API_BASE_URL || '');
 
+    if (!configuredBaseUrl) {
+        return import.meta.env.PROD ? '/api' : '';
+    }
+
     if (shouldUseSameOriginApiProxy(configuredBaseUrl)) {
         return '/api';
     }
